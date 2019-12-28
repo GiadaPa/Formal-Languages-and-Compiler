@@ -9,7 +9,7 @@
 %token NUMBER
 %token STRING
 %token true false null
-%left O_BEGIN O_END A_BEGIN A_END
+%left OBJECT_BEGIN OBJECT_END ARRAY_BEGIN ARRAY_END
 %left COMMA
 %left COLON
 
