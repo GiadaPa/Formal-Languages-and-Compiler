@@ -1,21 +1,23 @@
 %{
-    #include<stdio.h>
+    #include <stdio.h>
     #include "json.tab.h"
     char *strclone(char *str);
+    
     /*
     #define STRING "str"
     #define NUMBER "number"
-    #define O_BEGIN "o_begin"
-    #define O_END "o_end"
-    #define A_BEGIN "a_begin"
-    #define A_END "a_end"
+    #define OBJECT_BEGIN "object_begin"
+    #define OBJECT_END "object_end"
+    #define ARRAY_BEGIN "array_begin"
+    #define ARRAY_END "array_end"
     #define COMMA "comma"
+    #define COLON "colon"
     */
 %}
-DIGIT1to9 [1-9]
+
 DIGIT [0-9]
 DIGITS {DIGIT}+
-INT {DIGIT}|{DIGIT1to9}{DIGITS}|-{DIGIT}|-{DIGIT1to9}{DIGITS}
+INT {DIGIT}|{DIGIT}{DIGITS}|-{DIGIT}|-{DIGIT}{DIGITS}
 FRAC [.]{DIGITS}
 EXP {E}{DIGITS}
 E [eE][+-]?
@@ -27,44 +29,51 @@ UNICODECHAR \\u{HEX_DIGIT}{HEX_DIGIT}{HEX_DIGIT}{HEX_DIGIT}
 CHAR {UNESCAPEDCHAR}|{ESCAPEDCHAR}|{UNICODECHAR}
 CHARS {CHAR}+
 DBL_QUOTE ["]
+
 %%
 {DBL_QUOTE}{DBL_QUOTE} |
 {DBL_QUOTE}{CHARS}{DBL_QUOTE} {
     yylval=strclone(yytext);
     return STRING;
 };
+
 {NUMBER} {
     yylval=strclone(yytext);
     return NUMBER;
-}
+};
+
 true {
     return true;
 };
+
 false {
     return false;
 };
+
 null {
     return null;
 };
+
 \{ {
-    return O_BEGIN;
+    return OBJECT_BEGIN;
 };
 
 \} {
-    return O_END;
+    return OBJECT_END;
 };
 
 \[ {
-    return A_BEGIN;
+    return ARRAY_BEGIN;
 };
 
 \] {
-    return A_END;
+    return ARRAY_END;
 };
 
 , {
     return COMMA;
 };
+
 : {
     return COLON;
 };
@@ -76,6 +85,7 @@ null {
     exit(0);
 }
 %%
+
 char *strclone(char *str)
 {
     int len = strlen(str);
