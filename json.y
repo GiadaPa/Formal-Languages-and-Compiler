@@ -5,12 +5,14 @@
     #define YYSTYPE char*
     char *strconcat(char *str1, char *str2);
 %}
+
 %token NUMBER
 %token STRING
 %token true false null
 %left O_BEGIN O_END A_BEGIN A_END
 %left COMMA
 %left COLON
+
 %%
 START: ARRAY {
     printf("%s",$1);
@@ -19,14 +21,16 @@ START: ARRAY {
     printf("%s",$1);
   }
 ;
-OBJECT: O_BEGIN O_END {
+
+OBJECT: OBJECT_BEGIN OBJECT_END {
     $$ = "{}";
   }
-| O_BEGIN MEMBERS O_END {
+| OBJECT_BEGIN MEMBERS OBJECT_END {
     $$ = (char *)malloc(sizeof(char)*(1+strlen($2)+1+1));
     sprintf($$,"{%s}",$2);
   }
 ;
+
 MEMBERS: PAIR {
     $$ = $1;
   }
@@ -35,20 +39,23 @@ MEMBERS: PAIR {
     sprintf($$,"%s,%s",$1,$3);
   }
 ;
+
 PAIR: STRING COLON VALUE {
     $$ = (char *)malloc(sizeof(char)*(strlen($1)+1+strlen($3)+1));
     sprintf($$,"%s:%s",$1,$3);
   }
 ;
-ARRAY: A_BEGIN A_END {
+
+ARRAY: ARRAY_BEGIN ARRAY_END {
     $$ = (char *)malloc(sizeof(char)*(2+1));
     sprintf($$,"[]");
   }
-| A_BEGIN ELEMENTS A_END {
+| ARRAY_BEGIN ELEMENTS ARRAY_END {
     $$ = (char *)malloc(sizeof(char)*(1+strlen($2)+1+1));
     sprintf($$,"[%s]",$2);
 }
 ;
+
 ELEMENTS: VALUE {
     $$ = $1;
   }
@@ -57,6 +64,7 @@ ELEMENTS: VALUE {
     sprintf($$,"%s,%s",$1,$3);
   }
 ;
+
 VALUE: STRING {$$=yylval;}
 | NUMBER {$$=yylval;}
 | OBJECT {$$=$1;}
@@ -66,6 +74,7 @@ VALUE: STRING {$$=yylval;}
 | null {$$="null";}
 ;
 %%
+
 int main()
 {
    printf("\n");
