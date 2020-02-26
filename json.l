@@ -11,8 +11,9 @@
     #define ARRAY_BEGIN "array_begin"
     #define ARRAY_END "array_end"
     #define COMMA "comma"
-    #define COLON "colon"
-    */
+    #define SEMICOLON "semicolon"
+	*/
+    
 %}
 
 DIGIT [0-9]
@@ -75,7 +76,7 @@ null {
 };
 
 : {
-    return COLON;
+    return SEMICOLON;
 };
 
 [ \t\n]+ /* ignore whitespace */;
