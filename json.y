@@ -11,7 +11,7 @@
 %token true false null
 %left OBJECT_BEGIN OBJECT_END ARRAY_BEGIN ARRAY_END
 %left COMMA
-%left COLON
+%left SEMICOLON
 
 %%
 START: ARRAY {
@@ -40,7 +40,7 @@ MEMBERS: PAIR {
   }
 ;
 
-PAIR: STRING COLON VALUE {
+PAIR: STRING SEMICOLON VALUE {
     $$ = (char *)malloc(sizeof(char)*(strlen($1)+1+strlen($3)+1));
     sprintf($$,"%s:%s",$1,$3);
   }
@@ -53,7 +53,7 @@ ARRAY: ARRAY_BEGIN ARRAY_END {
 | ARRAY_BEGIN ELEMENTS ARRAY_END {
     $$ = (char *)malloc(sizeof(char)*(1+strlen($2)+1+1));
     sprintf($$,"[%s]",$2);
-}
+	}
 ;
 
 ELEMENTS: VALUE {
