@@ -1,6 +1,6 @@
 %{
     #include <stdio.h>
-    #include "json.tab.h"
+    // #include "json.tab.h"
     char *strclone(char *str);
     
 
@@ -18,28 +18,20 @@ DIGIT [0-9]
 DIGITS {DIGIT}+
 INT {DIGIT}|{DIGIT}{DIGITS}|-{DIGIT}|-{DIGIT}{DIGITS}
 FRAC [.]{DIGITS}
-// EXP {E}{DIGITS}
-// E [eE][+-]?
-// HEX_DIGIT [0-9a-f]
 NUMBER {INT}|{INT}{FRAC}
 LETTER [a-zA-Z]
 LETTERS {LETTER}+
-//UNESCAPEDCHAR [ -!#-\[\]-~]
-//ESCAPEDCHAR \\["\\bfnrt/]
-//UNICODECHAR \\u{HEX_DIGIT}{HEX_DIGIT}{HEX_DIGIT}{HEX_DIGIT}
-//CHAR {UNESCAPEDCHAR}|{ESCAPEDCHAR}|{UNICODECHAR}
-//CHARS {CHAR}+
 DBL_QUOTE ["]
 
 %%
 {DBL_QUOTE}{DBL_QUOTE} |
 {DBL_QUOTE}{LETTERS}{DBL_QUOTE} {
-    yylval=strclone(yytext);
+    char yylval=strclone(yytext);
     return STRING;
 };
 
 {NUMBER} {
-    yylval=strclone(yytext);
+    char yylval=strclone(yytext);
     return NUMBER;
 };
 
