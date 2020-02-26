@@ -3,7 +3,7 @@
     #include "json.tab.h"
     char *strclone(char *str);
     
-    /*
+
     #define STRING "str"
     #define NUMBER "number"
     #define OBJECT_BEGIN "object_begin"
@@ -11,29 +11,29 @@
     #define ARRAY_BEGIN "array_begin"
     #define ARRAY_END "array_end"
     #define COMMA "comma"
-    #define SEMICOLON "semicolon"
-	*/
-    
+    #define COLON "colon" 
 %}
 
 DIGIT [0-9]
 DIGITS {DIGIT}+
 INT {DIGIT}|{DIGIT}{DIGITS}|-{DIGIT}|-{DIGIT}{DIGITS}
 FRAC [.]{DIGITS}
-EXP {E}{DIGITS}
-E [eE][+-]?
-HEX_DIGIT [0-9a-f]
-NUMBER {INT}|{INT}{FRAC}|{INT}{EXP}|{INT}{FRAC}{EXP}
-UNESCAPEDCHAR [ -!#-\[\]-~]
-ESCAPEDCHAR \\["\\bfnrt/]
-UNICODECHAR \\u{HEX_DIGIT}{HEX_DIGIT}{HEX_DIGIT}{HEX_DIGIT}
-CHAR {UNESCAPEDCHAR}|{ESCAPEDCHAR}|{UNICODECHAR}
-CHARS {CHAR}+
+// EXP {E}{DIGITS}
+// E [eE][+-]?
+// HEX_DIGIT [0-9a-f]
+NUMBER {INT}|{INT}{FRAC}
+LETTER [a-zA-Z]
+LETTERS {LETTER}+
+//UNESCAPEDCHAR [ -!#-\[\]-~]
+//ESCAPEDCHAR \\["\\bfnrt/]
+//UNICODECHAR \\u{HEX_DIGIT}{HEX_DIGIT}{HEX_DIGIT}{HEX_DIGIT}
+//CHAR {UNESCAPEDCHAR}|{ESCAPEDCHAR}|{UNICODECHAR}
+//CHARS {CHAR}+
 DBL_QUOTE ["]
 
 %%
 {DBL_QUOTE}{DBL_QUOTE} |
-{DBL_QUOTE}{CHARS}{DBL_QUOTE} {
+{DBL_QUOTE}{LETTERS}{DBL_QUOTE} {
     yylval=strclone(yytext);
     return STRING;
 };
@@ -41,18 +41,6 @@ DBL_QUOTE ["]
 {NUMBER} {
     yylval=strclone(yytext);
     return NUMBER;
-};
-
-true {
-    return true;
-};
-
-false {
-    return false;
-};
-
-null {
-    return null;
 };
 
 \{ {
@@ -76,7 +64,7 @@ null {
 };
 
 : {
-    return SEMICOLON;
+    return COLON;
 };
 
 [ \t\n]+ /* ignore whitespace */;
