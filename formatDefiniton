@@ -1,0 +1,54 @@
+INPUT:
+{
+    document: {
+        children:
+            [
+                name: DISPLAY,
+                width: DISPLAY SIZE:
+                    [
+                        BANNER:
+                            name,
+                            width,
+                            height,
+                            children:
+                                [
+                                    DIVS: 
+                                        {
+                                            name,
+                                            width,
+                                            height,
+                                            x,
+                                            y,
+                                            background
+                                            fills (BACKGROUND?): 
+                                                [
+                                                    color,
+                                                    imageRef
+                                                ],
+                                            cornerRadius,
+                                            style: 
+                                                [
+                                                    fontWeight,
+                                                    fontSize,
+                                                    textAlignHorizontal,
+                                                    lineHeightPx,
+                                                    fontFamily,
+                                                    color
+                                                ],
+                                        }
+                                ]
+                    ]
+            ]
+    }
+}
+
+RESULT
+@media (min-width: DISPLAY SIZE) {
+    #BANNER-name .children-name {
+        properties
+    }
+}
+
+<div id="BANNER-name">
+    <div class="children-name"></div>
+</div>
