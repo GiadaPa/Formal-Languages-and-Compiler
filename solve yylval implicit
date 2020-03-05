@@ -1,0 +1,63 @@
+implicit declaration of yylval
+
+
+
+Here is an answer to a more sophisticated version of this problem which isn't easily solved just by adding a declaration.
+
+GNU Bison supports the generation of re-entrant parsers which work together with Flex (using Flex's %option bison-bridge re-entrant). Berkeley Yacc provides a compatible implementation.
+
+Here is a guide on how to solve this undeclared yylex for both parser generators.
+
+With a re-entrant, "Bison bridged" lexer, the declaration of yylex turns into this:
+
+int yylex(YYSTYPE *yylval, void *scanner);
+
+If you place this prototype in the %{ ... %} initial header section of your Yacc parser, and generate the parser with either Bison or Berkeley Yacc, the compiler will complain that YYSTYPE is not declared.
+
+You cannot simply create a forward declaration for YYSTYPE, because in Berkeley Yacc, it does not have a union tag. In Bison, it is typedef union YYSTYPE { ... } YYSTYPE, but in Berkeley Yacc it is typedef { ... } YYSTYPE: no tag.
+
+But, in Berkeley Yacc, if you put a declaration in the third section of the parser, it is in scope of the yylex call! So the following works for Berkeley yacc:
+
+%{
+/* includes, C defs */
+%}
+
+/* Yacc defs */
+
+%%
+
+/* Yacc grammar */
+
+%%
+
+int yylex(YYSTYPE *, void *);
+
+/* code */
+
+If this is generated with Bison, the problem persists: there is no prototype in scope of the yylex call.
+
+This little fix makes it work for GNU Bison:
+
+%{
+/* includes, C defs */
+
+#if YYBISON
+union YYSTYPE;
+int yylex(union YYSTYPE *, void *);
+#endif
+
+%}
+
+/* Yacc defs */
+
+%%
+
+/* Yacc grammar */
+
+%%
+
+int yylex(YYSTYPE *, void *);
+
+/* code */
+
+There you go.
