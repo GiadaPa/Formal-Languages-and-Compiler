@@ -1,12 +1,12 @@
 # Makefile example -- scanner and parser.
-# Creates "myprogram" from "jsonl.l", "jsonp.y", and "myprogram.c"
+# Creates "outputfile" from "jsonLex.l", "jsonPar.y", and "outputfile.c"
 #
-    LEX     = flex
-    YACC    = bison -y
-    YFLAGS  = -d
-    objects = jsonl.o jsonp.o myprogram.o
+    LEX = flex
+    YACC = bison -y
+    YFLAGS = -d
+    objects = jsonLex.o jsonPar.o outputfile.o
 
-    myprogram: $(objects)
-    jsonl.o: jsonl.l jsonp.c
-    jsonp.o: jsonp.y
-    myprogram.o: myprogram.c
+    outputfile: $(objects)
+    jsonLex.o: jsonLex.l jsonPar.c
+    jsonPar.o: jsonPar.y
+    outputfile.o: outputfile.c
