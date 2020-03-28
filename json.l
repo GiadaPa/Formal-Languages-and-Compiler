@@ -1,17 +1,8 @@
 %{
     #include <stdio.h>
-    // #include "json.tab.h"
+    #include "y.tab.h"
     char *strclone(char *str);
     
-
-    #define STRING "str"
-    #define NUMBER "number"
-    #define OBJECT_BEGIN "object_begin"
-    #define OBJECT_END "object_end"
-    #define ARRAY_BEGIN "array_begin"
-    #define ARRAY_END "array_end"
-    #define COMMA "comma"
-    #define COLON "colon" 
 %}
 
 DIGIT [0-9]
@@ -22,17 +13,22 @@ NUMBER {INT}|{INT}{FRAC}
 LETTER [a-zA-Z]
 LETTERS {LETTER}+
 DBL_QUOTE ["]
+STRING {DBL_QUOTE}{DBL_QUOTE}|{DBL_QUOTE}{LETTERS}{DBL_QUOTE}
 
 %%
-{DBL_QUOTE}{DBL_QUOTE} |
-{DBL_QUOTE}{LETTERS}{DBL_QUOTE} {
-    char yylval=strclone(yytext);
+{STRING} {
+    char* yylval = strclone(yytext);
     return STRING;
 };
 
 {NUMBER} {
-    char yylval=strclone(yytext);
+    yylval=atoi(yytext);
     return NUMBER;
+};
+
+true|false {
+    char* yylval=strclone(yytext);
+    return BOOL;
 };
 
 \{ {

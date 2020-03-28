@@ -3,31 +3,30 @@
     #include<string.h>
     #include<stdlib.h>
     #define YYSTYPE char*
-    char *strconcat(char *str1, char *str2);
+    // char *strconcat(char *str1, char *str2);
+
+
 %}
 
 %token NUMBER
 %token STRING
-%token true false null
-%left OBJECT_BEGIN OBJECT_END ARRAY_BEGIN ARRAY_END
+%token BOOL
+%right OBJECT_BEGIN ARRAY_BEGIN 
+%left OBJECT_END ARRAY_END
 %left COMMA
-%left SEMICOLON
+%left COLON
 
 %%
-START: ARRAY {
-    printf("%s",$1);
-  }
-| OBJECT {
-    printf("%s",$1);
+START: OBJECT {
+    printf("%s", $1);
   }
 ;
 
-OBJECT: OBJECT_BEGIN OBJECT_END {
-    $$ = "{}";
-  }
-| OBJECT_BEGIN MEMBERS OBJECT_END {
-    $$ = (char *)malloc(sizeof(char)*(1+strlen($2)+1+1));
-    sprintf($$,"{%s}",$2);
+OBJECT: OBJECT_BEGIN MEMBERS OBJECT_END {
+    // $$ = (char *)malloc(sizeof(char)*(10 + strlen($2)+2));
+    $$ = $2;
+    // printf("%s", $2);
+    // sprintf($$,"{%s}",$2);
   }
 ;
 
@@ -35,43 +34,48 @@ MEMBERS: PAIR {
     $$ = $1;
   }
 | PAIR COMMA MEMBERS {
-    $$ = (char *)malloc(sizeof(char)*(strlen($1)+1+strlen($3)+1));
-    sprintf($$,"%s,%s",$1,$3);
+    // $$ = (char *)malloc(sizeof(char)*(10 + strlen($1)+2 + strlen($3)+2));
+    $$ = $2;
+    // sprintf($$,"%s,%s",$1,$3);
   }
 ;
 
-PAIR: STRING SEMICOLON VALUE {
-    $$ = (char *)malloc(sizeof(char)*(strlen($1)+1+strlen($3)+1));
-    sprintf($$,"%s:%s",$1,$3);
+PAIR: KEY COLON VALUE {
+    // $$ = (char *)malloc(sizeof(char)*(10 + strlen($1)+2 + strlen($3)+2));
+    $$ = $1;
+    printf("%s:%s",$1,$3);
+    // sprintf($$,"%s:%s",$1,$3);
   }
 ;
 
-ARRAY: ARRAY_BEGIN ARRAY_END {
-    $$ = (char *)malloc(sizeof(char)*(2+1));
-    sprintf($$,"[]");
-  }
-| ARRAY_BEGIN ELEMENTS ARRAY_END {
-    $$ = (char *)malloc(sizeof(char)*(1+strlen($2)+1+1));
-    sprintf($$,"[%s]",$2);
+ARRAY: ARRAY_BEGIN VALUE ARRAY_END {
+    // $$ = (char *)malloc(sizeof(char)*(10 + strlen($2)+2));
+    $$ = $2;
+    // sprintf($$,"[%s]",$2);
 	}
 ;
 
-ELEMENTS: VALUE {
-    $$ = $1;
-  }
-| VALUE COMMA ELEMENTS {
-    $$ = (char *)malloc(sizeof(char)*(strlen($1)+1+strlen($3)+1));
-    sprintf($$,"%s,%s",$1,$3);
-  }
-;
+KEY: STRING {
+  printf("%s", yylval);
+  $$ = "key";
+};
 
-VALUE: STRING {$$=yylval;}
-| NUMBER {$$=yylval;}
-| OBJECT {$$=$1;}
+VALUE: STRING {
+    printf("%s", "stringa");
+    $$="stringa"; 
+  } 
+| NUMBER {
+    printf("%s", "numero");
+    $$=yylval;
+  }
+| BOOL {
+  $$=yylval;
+  }
+| OBJECT {
+  $$=$1;
+    printf("%s", $1);
+  }
 | ARRAY {$$=$1;}
-| true {$$="true";}
-| false {$$="false";}
-| null {$$="null";}
 ;
 %%
 
@@ -82,6 +86,7 @@ int main()
    printf("\n");
    return 0;
 }
+
 int yywrap()
 {
    return 1;
@@ -89,12 +94,13 @@ int yywrap()
 void yyerror (char const *s) {
    fprintf (stderr, "%s\n", s);
 }
-char *strconcat(char *str1, char *str2)
-{
-    int len1 = strlen(str1);
-    int len2 = strlen(str2);
-    char *str3 = (char *)malloc(sizeof(char)*(len1+len2+1));
-    strcpy(str3,str1);
-    strcpy(&(str3[len1]),str2);
-    return str3;
-}
+
+// char *strconcat(char *str1, char *str2)
+// {
+//     int len1 = strlen(str1);
+//     int len2 = strlen(str2);
+//     char *str3 = (char *)malloc(sizeof(char)*(len1+len2+2));
+//     strcpy(str3,str1);
+//     strcpy(&(str3[len1]),str2);
+//     return str3;
+// }
