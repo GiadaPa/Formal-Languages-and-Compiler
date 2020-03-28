@@ -8,76 +8,88 @@
 
 %}
 
-%token NUMBER
-%token STRING
-%token BOOL
+%union { 
+  int integer;
+  char *string;
+}
+
+%start object
+
+%token <integer>NUMBER
+%token <*string>STRING
+%token <*string>BOOL
 %right OBJECT_BEGIN ARRAY_BEGIN 
 %left OBJECT_END ARRAY_END
 %left COMMA
 %left COLON
 
 %%
-START: OBJECT {
-    printf("%s", $1);
-  }
-;
+object: OBJECT_BEGIN STRING OBJECT_END {
+  printf("%s", $2.string);
+}
+%%
 
-OBJECT: OBJECT_BEGIN MEMBERS OBJECT_END {
+
+/*
+%%
+object: OBJECT_BEGIN members OBJECT_END {
     // $$ = (char *)malloc(sizeof(char)*(10 + strlen($2)+2));
-    $$ = $2;
-    // printf("%s", $2);
+    printf("%s", $<string>2);
     // sprintf($$,"{%s}",$2);
   }
 ;
 
-MEMBERS: PAIR {
-    $$ = $1;
+members: pair {
+    $<string>$ = $<string>1;
   }
-| PAIR COMMA MEMBERS {
-    // $$ = (char *)malloc(sizeof(char)*(10 + strlen($1)+2 + strlen($3)+2));
-    $$ = $2;
+| pair COMMA members {
+    $<string>$ = (char *)malloc(sizeof(char)*(10 + strlen($<string>1)+2 + strlen($<string>3)+2));
+    // $$ = $2;
     // sprintf($$,"%s,%s",$1,$3);
   }
 ;
 
-PAIR: KEY COLON VALUE {
-    // $$ = (char *)malloc(sizeof(char)*(10 + strlen($1)+2 + strlen($3)+2));
-    $$ = $1;
-    printf("%s:%s",$1,$3);
+pair: key COLON value {
+    $<string>$ = (char *)malloc(sizeof(char)*(10 + strlen($<string>1)+2 + strlen($<string>3)+2));
+    // $$ = $1;
+    printf("%s:%s",$<string>1,$<string>3);
     // sprintf($$,"%s:%s",$1,$3);
   }
 ;
 
-ARRAY: ARRAY_BEGIN VALUE ARRAY_END {
-    // $$ = (char *)malloc(sizeof(char)*(10 + strlen($2)+2));
-    $$ = $2;
+array: ARRAY_BEGIN value ARRAY_END {
+    $<string>$ = (char *)malloc(sizeof(char)*(10 + strlen($<string>2)+2));
+    // $$ = $2;
     // sprintf($$,"[%s]",$2);
 	}
 ;
 
-KEY: STRING {
-  printf("%s", yylval);
-  $$ = "key";
+key: STRING {
+  printf("%s", $1);
+  $<string>$ = $1;
 };
 
-VALUE: STRING {
-    printf("%s", "stringa");
-    $$="stringa"; 
+value: STRING {
+    printf("%s", $1);
+    $<string>$ = $1; 
   } 
 | NUMBER {
-    printf("%s", "numero");
-    $$=yylval;
+    printf("%d", $1);
+    $<integer>$ = $1;
   }
 | BOOL {
-  $$=yylval;
+    $<string>$ = $1;
   }
-| OBJECT {
-  $$=$1;
-    printf("%s", $1);
+| object {
+    $<string>$ = $<string>1;
   }
-| ARRAY {$$=$1;}
+| array {
+    $<string>$ = $1;
+  }
 ;
 %%
+
+*/
 
 int main()
 {

@@ -17,17 +17,18 @@ STRING {DBL_QUOTE}{DBL_QUOTE}|{DBL_QUOTE}{LETTERS}{DBL_QUOTE}
 
 %%
 {STRING} {
-    char* yylval = strclone(yytext);
+    yylval.string = strclone(yytext);
     return STRING;
 };
 
 {NUMBER} {
-    yylval=atoi(yytext);
+    yylval.integer = atoi(yytext);
+    printf("%d", yylval.integer);
     return NUMBER;
 };
 
 true|false {
-    char* yylval=strclone(yytext);
+    yylval.string = strclone(yytext);
     return BOOL;
 };
 
