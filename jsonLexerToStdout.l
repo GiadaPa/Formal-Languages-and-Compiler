@@ -12,12 +12,13 @@
 
 DIGIT [0-9]
 DIGITS {DIGIT}+
-INT {DIGIT}|{DIGIT}{DIGITS}|-{DIGIT}|-{DIGIT}{DIGITS}
-FRAC [.]{DIGITS}
+INT -?{DIGITS}
+FRAC \.{DIGITS}
 NUMBER {INT}|{INT}{FRAC}
 LETTER [a-zA-Z]
 LETTERS {LETTER}+
 STRING \"\"|\"({LETTERS}|{NUMBER})+\"
+BOOLEAN true|false
 
 %%
 {STRING} {
@@ -25,19 +26,19 @@ STRING \"\"|\"({LETTERS}|{NUMBER})+\"
 }
 
 {NUMBER} {
-    printf("%d", atoi(yytext));
+    printf("%f", atof(yytext));
 }
 
 null {
-    printf("null", yytext);
+    printf("nullo", yytext);
 }
 
 true {
-    printf("true", yytext);
+    printf("true__", yytext);
 }
 
 false {
-    printf("false", yytext);
+    printf("false__", yytext);
 }
 
 "{" { 
