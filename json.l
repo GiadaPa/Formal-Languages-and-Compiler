@@ -4,13 +4,12 @@
     #include <string.h>
     #include <stdlib.h>
     #include "json.tab.h"
-    #include "json.tab.c"
 %}
 
 DIGIT [0-9]
 DIGITS {DIGIT}+
-INT {DIGIT}|{DIGIT}{DIGITS}|-{DIGIT}|-{DIGIT}{DIGITS}
-FRAC [.]{DIGITS}
+INT -?{DIGITS}
+FRAC \.{DIGITS}
 NUMBER {INT}|{INT}{FRAC}
 LETTER [a-zA-Z]
 LETTERS {LETTER}+
