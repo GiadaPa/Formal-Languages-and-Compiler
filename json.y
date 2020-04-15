@@ -6,7 +6,7 @@
 
 %union { 
   int value;
-  struct symtbl *symptr;
+  struct symtbl *symptr; //definire
 }
 
 %token <value> NUMBER
@@ -57,6 +57,7 @@ void yyerror (char* s) {
 }
 
 int main() {
-  return yyparse();
+  yyparse();
+  return 0;
 }
 
