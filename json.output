@@ -1,0 +1,281 @@
+Grammar
+
+    0 $accept: object $end
+
+    1 object: OBJECT_BEGIN OBJECT_END
+    2       | OBJECT_BEGIN members OBJECT_END
+
+    3 members: pair
+    4        | pair COMMA members
+
+    5 pair: STRING COLON value
+
+    6 array: ARRAY_BEGIN ARRAY_END
+    7      | ARRAY_BEGIN elements ARRAY_END
+
+    8 elements: value
+    9         | value COMMA elements
+
+   10 value: STRING
+   11      | NUMBER
+   12      | object
+   13      | array
+   14      | BOOLEAN
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    NUMBER <str> (258) 11
+    STRING <str> (259) 5 10
+    BOOLEAN <str> (260) 14
+    OBJECT_BEGIN (261) 1 2
+    ARRAY_BEGIN (262) 6 7
+    OBJECT_END (263) 1 2
+    ARRAY_END (264) 6 7
+    COMMA (265) 4 9
+    COLON (266) 5
+
+
+Nonterminals, with rules where they appear
+
+    $accept (12)
+        on left: 0
+    object (13)
+        on left: 1 2
+        on right: 0 12
+    members (14)
+        on left: 3 4
+        on right: 2 4
+    pair (15)
+        on left: 5
+        on right: 3 4
+    array (16)
+        on left: 6 7
+        on right: 13
+    elements (17)
+        on left: 8 9
+        on right: 7 9
+    value <str> (18)
+        on left: 10 11 12 13 14
+        on right: 5 8 9
+
+
+State 0
+
+    0 $accept: . object $end
+
+    OBJECT_BEGIN  shift, and go to state 1
+
+    object  go to state 2
+
+
+State 1
+
+    1 object: OBJECT_BEGIN . OBJECT_END
+    2       | OBJECT_BEGIN . members OBJECT_END
+
+    STRING      shift, and go to state 3
+    OBJECT_END  shift, and go to state 4
+
+    members  go to state 5
+    pair     go to state 6
+
+
+State 2
+
+    0 $accept: object . $end
+
+    $end  shift, and go to state 7
+
+
+State 3
+
+    5 pair: STRING . COLON value
+
+    COLON  shift, and go to state 8
+
+
+State 4
+
+    1 object: OBJECT_BEGIN OBJECT_END .
+
+    $default  reduce using rule 1 (object)
+
+
+State 5
+
+    2 object: OBJECT_BEGIN members . OBJECT_END
+
+    OBJECT_END  shift, and go to state 9
+
+
+State 6
+
+    3 members: pair .
+    4        | pair . COMMA members
+
+    COMMA  shift, and go to state 10
+
+    $default  reduce using rule 3 (members)
+
+
+State 7
+
+    0 $accept: object $end .
+
+    $default  accept
+
+
+State 8
+
+    5 pair: STRING COLON . value
+
+    NUMBER        shift, and go to state 11
+    STRING        shift, and go to state 12
+    BOOLEAN       shift, and go to state 13
+    OBJECT_BEGIN  shift, and go to state 1
+    ARRAY_BEGIN   shift, and go to state 14
+
+    object  go to state 15
+    array   go to state 16
+    value   go to state 17
+
+
+State 9
+
+    2 object: OBJECT_BEGIN members OBJECT_END .
+
+    $default  reduce using rule 2 (object)
+
+
+State 10
+
+    4 members: pair COMMA . members
+
+    STRING  shift, and go to state 3
+
+    members  go to state 18
+    pair     go to state 6
+
+
+State 11
+
+   11 value: NUMBER .
+
+    $default  reduce using rule 11 (value)
+
+
+State 12
+
+   10 value: STRING .
+
+    $default  reduce using rule 10 (value)
+
+
+State 13
+
+   14 value: BOOLEAN .
+
+    $default  reduce using rule 14 (value)
+
+
+State 14
+
+    6 array: ARRAY_BEGIN . ARRAY_END
+    7      | ARRAY_BEGIN . elements ARRAY_END
+
+    NUMBER        shift, and go to state 11
+    STRING        shift, and go to state 12
+    BOOLEAN       shift, and go to state 13
+    OBJECT_BEGIN  shift, and go to state 1
+    ARRAY_BEGIN   shift, and go to state 14
+    ARRAY_END     shift, and go to state 19
+
+    object    go to state 15
+    array     go to state 16
+    elements  go to state 20
+    value     go to state 21
+
+
+State 15
+
+   12 value: object .
+
+    $default  reduce using rule 12 (value)
+
+
+State 16
+
+   13 value: array .
+
+    $default  reduce using rule 13 (value)
+
+
+State 17
+
+    5 pair: STRING COLON value .
+
+    $default  reduce using rule 5 (pair)
+
+
+State 18
+
+    4 members: pair COMMA members .
+
+    $default  reduce using rule 4 (members)
+
+
+State 19
+
+    6 array: ARRAY_BEGIN ARRAY_END .
+
+    $default  reduce using rule 6 (array)
+
+
+State 20
+
+    7 array: ARRAY_BEGIN elements . ARRAY_END
+
+    ARRAY_END  shift, and go to state 22
+
+
+State 21
+
+    8 elements: value .
+    9         | value . COMMA elements
+
+    COMMA  shift, and go to state 23
+
+    $default  reduce using rule 8 (elements)
+
+
+State 22
+
+    7 array: ARRAY_BEGIN elements ARRAY_END .
+
+    $default  reduce using rule 7 (array)
+
+
+State 23
+
+    9 elements: value COMMA . elements
+
+    NUMBER        shift, and go to state 11
+    STRING        shift, and go to state 12
+    BOOLEAN       shift, and go to state 13
+    OBJECT_BEGIN  shift, and go to state 1
+    ARRAY_BEGIN   shift, and go to state 14
+
+    object    go to state 15
+    array     go to state 16
+    elements  go to state 24
+    value     go to state 21
+
+
+State 24
+
+    9 elements: value COMMA elements .
+
+    $default  reduce using rule 9 (elements)

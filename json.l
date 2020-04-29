@@ -1,4 +1,4 @@
-%option noyywrap
+%option outfile="json.lex.c"
 %{
     #include <stdio.h>
     #include <string.h>
@@ -18,23 +18,23 @@ BOOLEAN true|false
 
 %%
 
-{STRING} { yylval.symptr = symlookup(yytext); return (STRING);}
+{STRING} { yylval.str = strdup(yytext); return STRING;}
 
-{NUMBER} { yylval.value = atof(yytext); return (NUMBER);}
+{NUMBER} { yylval.str = strdup(yytext); return NUMBER;}
 
-{BOOLEAN} { yylval.symptr = symlookup(yytext); return (BOOLEAN);}
+{BOOLEAN} { yylval.str = strdup(yytext); return BOOLEAN;}
 
-"{" { return (OBJECT_BEGIN);}
+"{" { return OBJECT_BEGIN;}
 
-"}" { return (OBJECT_END);}
+"}" { return OBJECT_END;}
 
-"[" { return (ARRAY_BEGIN);}
+"[" { return ARRAY_BEGIN;}
 
-"]" { return (ARRAY_END);};
+"]" { return ARRAY_END;};
 
-"," { return (COMMA);}
+"," { return COMMA;}
 
-":" { return (COLON);}
+":" { return COLON;}
 
 [ \t\n]+ /* ignore whitespace */{;}
 

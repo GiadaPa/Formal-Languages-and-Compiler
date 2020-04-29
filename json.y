@@ -1,56 +1,46 @@
 %{
-  #include<stdio.h>
-  #include<string.h>
-  #include<stdlib.h>
+  #include <stdio.h>
+  #include "json.lex.c"
 %}
 
-%union { 
-  int value;
-  struct symtbl *symptr; //definire
-}
-
-%token <value> NUMBER
-%token <symptr> STRING
-%token <symptr> BOOLEAN
-
-%token OBJECT_BEGIN ARRAY_BEGIN 
+%token <str> NUMBER
+%token <str> STRING
+%token <str> BOOLEAN
+%token OBJECT_BEGIN ARRAY_BEGIN
 %token OBJECT_END ARRAY_END
 %token COMMA
 %token COLON
 
-%type <symptr> object
-%type <symptr> members
-%type <symptr> pair
-%type <symptr> array
-%type <symptr> elements
-%type <symptr> value
+%type <str> value
+
+%union {
+  char *str;
+}
 
 %%
 
-object    : OBJECT_BEGIN OBJECT_END { $$ = {}; }
-          |  OBJECT_BEGIN members OBJECT_END { $$ = { $2 }; }
+object: OBJECT_BEGIN OBJECT_END { printf("hoho"); }
+          |  OBJECT_BEGIN members OBJECT_END { printf("init"); }
           ;
-members   : pair { $$ = $1; }
-          | pair COMMA members { $$ = $1, $3; }
+members: pair { printf("cacca"); }
+          | pair COMMA members { printf("hoho"); }
           ;
-pair      : STRING COLON value { $$ = $1 : $3; }
+pair: STRING COLON value { printf("%s", $1); }
           ;
-array     : ARRAY_BEGIN ARRAY_END { $$ =  []; }
-          | ARRAY_BEGIN elements ARRAY_END { $$ = [ $2 ]; }
+array: ARRAY_BEGIN ARRAY_END { printf("hoho"); }
+          | ARRAY_BEGIN elements ARRAY_END { printf("hoho"); }
           ;
-elements  : value { $$ = $1; }
-          | value COMMA elements { $$ = $1, $3; }
+elements: value { printf("hoho"); }
+          | value COMMA elements { printf("hoho");  }
           ;
-value     : STRING { $$ = yylval; }
-          | NUMBER { $$ = yylval; }
-          | object { $$ = $1; }
-          | array { $$ = $1; }
-          | BOOLEAN { $$ = yylval; }
+value: STRING { printf("%s", $1); }
+          | NUMBER { printf("%s", $1); }
+          | object { printf("hoho");  }
+          | array { printf("hoho");  }
+          | BOOLEAN { printf("hoho");  }
           ;
 
 %%
-
-#include "lex.yy.c"
 
 void yyerror (char* s) {
   fprintf (stderr, "%s\n", s);
