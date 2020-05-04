@@ -1,0 +1,113 @@
+{
+    "html": 
+        {
+            "name" : "Xiaomi Banner",
+            "body": 
+                [
+                    {
+                        "name": "banner",
+                        "style": 
+                            {
+                                "width":"1000px",
+                                "heght":"399px",
+                                "display": "flex",
+                                "justify-content":"space-between",
+                                "background-color": "#630978",
+                                "font-family":"Roboto"
+                            }
+                    },
+                    {
+                        "name":"logo",
+                        "style": 
+                            {
+                                "top": "25px",
+                                "left": "25px",
+                                "heght": "65px",
+                                "width": "65px"
+                            }
+                    },
+                    {
+                        "name": "title",
+                        "children": 
+                            [
+                                {
+                                    "name": "h1",
+                                    "style": 
+                                        {
+                                            "font-size": "50px",
+                                            "color": "white",
+                                            "font-family": "Roboto"
+                                        }
+                                },
+                                {
+                                    "text1": "OFFERTA",
+                                    "text2": "2650 $"
+                                }
+                            ]
+                    },
+                    {
+                        "name" :"title",
+                        "children": 
+                            [
+                                {
+                                    "name": "h2",
+                                    "style": 
+                                        {
+                                            "font-size": "40px",
+                                            "color": "white",
+                                            "font-family": "Roboto" 
+                                        }
+                                },
+                                {
+                                    "text": "Xiaomi Mi 9T"
+                                }
+                            ]
+                    },
+                    {
+                        "name": "image",
+                        "style": 
+                            {
+                                "display": "absolute",
+                                "height": 350.0,
+                                "width": 300.0,
+                                "left": 2726.0,
+                                "top": -252.0
+                            }
+                    },
+                    {
+                        "name": "icons",
+                        "style": 
+                            {
+                                "display": "flex",
+                                "flex-direction": "column"
+                            }
+                    },
+                    {
+                        "name": "row",
+                        "children": 
+                            {
+                                "name": "icon",
+                                "style": 
+                                    {
+                                        "height": "50px",
+                                        "width": "50px",
+                                        "display": "inline-block"
+                                    }
+                            }
+                    },
+                    {
+                        "name": "row",
+                        "children": 
+                            {
+                                "name": "text",
+                                "style": 
+                                    {
+                                        "font-size": "12px",
+                                        "color": "white",
+                                        "font-family": "Roboto" 
+                                    }
+                            }
+                    }
+                ]
+        }
+}
