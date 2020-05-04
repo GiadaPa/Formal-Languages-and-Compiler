@@ -17,6 +17,9 @@
 
   #define NKEYS (sizeof(lookuptable)/sizeof(t_symstruct))
 
+  char* decodeKV(char* key, char* value);
+  char* decodeObject(char* key, char* value);
+
 %}
 
 %token <str> NUMBER
@@ -28,6 +31,9 @@
 %token COLON
 
 %type <str> value
+%type <str> pair
+%type <str> members
+%type <str> object
 
 %union {
   char *str;
@@ -36,13 +42,16 @@
 %%
 
 object: OBJECT_BEGIN OBJECT_END { printf("hoho"); }
-          |  OBJECT_BEGIN members OBJECT_END { printf("OBJECTwithMEMBER\n"); }
+          |  OBJECT_BEGIN members OBJECT_END { checkDIV($2); $$ = $2; }
           ;
-members: pair { printf("cacca"); }
-          | pair COMMA members { printf("hoho"); }
+members: pair { $$ = $1; }
+          | pair COMMA members { 
+              $$ = malloc(sizeof($1) + sizeof($3) + 2);
+              sprintf($$, "%s %s", $1, $3);
+            }
           ;
-pair: STRING COLON value { decodeKV($1, $3); }
-          | STRING COLON object { decodeObject($1);  }
+pair: STRING COLON value { $$ = decodeKV($1, $3); }
+          | STRING COLON object { $$ = decodeObject($1, $3);  }
           | STRING COLON array { printf("hoho");  }
           ;
 array: ARRAY_BEGIN ARRAY_END { printf("hoho"); }
@@ -78,26 +87,39 @@ int lookup(char *key)
     return -1;
 }
 
-void decodeKV(char* key, char* value) {
-
+char* decodeKV(char* key, char* value) {
+  char* out = malloc(100);
   switch(lookup(key)) {
     case K1:
-      printf("<div class=\"%s\" \n", value);
+      sprintf(out, "<div class=\"%s\"", value);
+      printf("%s", out);
       break;
     case K2:
-      printf(">%s\n", value);
+      sprintf(out, ">\n%s\n", value);
+      printf("%s", out);
       break;
     default:
-      printf("%s: %s;\n", key, value);
+      sprintf(out, "%s: %s;\n", key, value);
   }
+  return out;
 }
 
-void decodeObject(char* key) {
+char* decodeObject(char* key, char* value) {
+  char* out;
   switch(lookup(key)) {
     case OBJ1:
-      printf("CASEOBJ1\n");
+      out = malloc(sizeof("style=\"\"") + sizeof(value) + 2);
+      printf("%s %s\"", "style=\"", value);
       break;
     default:
-      printf("DEFAULT OBJECT\n");
+      out = "DEFAULT OBJECT\n";
   }
+
+  return out;
+}
+
+void checkDIV(char* str) {
+  if( strncmp("<div", str, 4) == 0) {
+    printf("</div>");
+  };
 }

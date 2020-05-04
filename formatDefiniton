@@ -11,7 +11,7 @@ INPUT:
                             width,
                             height,
                             children:
-                                [
+                                    [
                                     DIVS: 
                                         {
                                             name,
@@ -35,6 +35,7 @@ INPUT:
                                                     fontFamily,
                                                     color
                                                 ],
+                                            characters
                                         }
                                 ]
                     ]
