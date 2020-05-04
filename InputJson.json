@@ -1,113 +1,181 @@
 {
-    "html": 
-        {
-            "name" : "Xiaomi Banner",
-            "body": 
-                [
+    "components": {},
+    "document": {
+        "name": "xiaomi-banner",
+        "children": [
+            {
+                "name": "banner",
+                "style": {
+                    "width": "1000px",
+                    "heght": "399px",
+                    "display": "flex",
+                    "justify-content": "space-between",
+                    "font-family": "Roboto"
+                },
+                "fill": {
+                    "type": "solid",
+                    "color": "#630978"
+                },
+                "children": [
                     {
-                        "name": "banner",
-                        "style": 
-                            {
-                                "width":"1000px",
-                                "heght":"399px",
-                                "display": "flex",
-                                "justify-content":"space-between",
-                                "background-color": "#630978",
-                                "font-family":"Roboto"
-                            }
-                    },
-                    {
-                        "name":"logo",
-                        "style": 
-                            {
-                                "top": "25px",
-                                "left": "25px",
-                                "heght": "65px",
-                                "width": "65px"
-                            }
+                        "name": "logo",
+                        "style": {
+                            "top": "25px",
+                            "left": "25px",
+                            "heght": "65px",
+                            "width": "65px"
+                        },
+                        "fill": {
+                            "type": "image",
+                            "imageRef": "22c4422dd975abae62c448816e7be0feac25b1e0"
+                        }
                     },
                     {
                         "name": "title",
-                        "children": 
-                            [
-                                {
-                                    "name": "h1",
-                                    "style": 
-                                        {
-                                            "font-size": "50px",
-                                            "color": "white",
-                                            "font-family": "Roboto"
-                                        }
+                        "children": [
+                            {
+                                "name": "h1",
+                                "style": {
+                                    "font-size": "50px",
+                                    "color": "white",
+                                    "font-family": "Roboto"
                                 },
-                                {
-                                    "text1": "OFFERTA",
-                                    "text2": "2650 $"
-                                }
-                            ]
-                    },
-                    {
-                        "name" :"title",
-                        "children": 
-                            [
-                                {
-                                    "name": "h2",
-                                    "style": 
-                                        {
-                                            "font-size": "40px",
-                                            "color": "white",
-                                            "font-family": "Roboto" 
-                                        }
+                                "characters": "OFFERTA"
+                            },
+                            {
+                                "name": "h2",
+                                "style": {
+                                    "font-size": "40px",
+                                    "color": "white",
+                                    "font-family": "Roboto"
                                 },
-                                {
-                                    "text": "Xiaomi Mi 9T"
-                                }
-                            ]
+                                "characters": "Xiaomi Mi 9T"
+                            },
+                            {
+                                "name": "h1",
+                                "style": {
+                                    "font-size": "50px",
+                                    "color": "white",
+                                    "font-family": "Roboto"
+                                },
+                                "characters": "2650$"
+                            }
+                        ]
                     },
                     {
                         "name": "image",
-                        "style": 
-                            {
-                                "display": "absolute",
-                                "height": 350.0,
-                                "width": 300.0,
-                                "left": 2726.0,
-                                "top": -252.0
-                            }
+                        // fill background
+                        "style": {
+                            "display": "absolute",
+                            "height": 350.0,
+                            "width": 300.0,
+                            "left": 2726.0,
+                            "top": -252.0
+                        }
                     },
                     {
                         "name": "icons",
-                        "style": 
+                        "style": {
+                            "display": "flex",
+                            "flex-direction": "column"
+                        },
+                        "children": [
                             {
-                                "display": "flex",
-                                "flex-direction": "column"
-                            }
-                    },
-                    {
-                        "name": "row",
-                        "children": 
-                            {
-                                "name": "icon",
-                                "style": 
+                                "name": "row",
+                                "children": [
                                     {
-                                        "height": "50px",
-                                        "width": "50px",
-                                        "display": "inline-block"
-                                    }
-                            }
-                    },
-                    {
-                        "name": "row",
-                        "children": 
-                            {
-                                "name": "text",
-                                "style": 
+                                        "name": "icon",
+                                        "style": {
+                                            "height": "50px",
+                                            "width": "50px",
+                                            "display": "inline-block"
+                                        }
+                                    },
                                     {
-                                        "font-size": "12px",
-                                        "color": "white",
-                                        "font-family": "Roboto" 
+                                        "name": "text",
+                                        "style": {
+                                            "font-size": "12px",
+                                            "color": "white",
+                                            "font-family": "Roboto"
+                                        }
                                     }
+                                ]
+                            },
+                            {
+                                "name": "row",
+                                "children": [
+                                    {
+                                        "name": "icon",
+                                        "style": {
+                                            "height": "50px",
+                                            "width": "50px",
+                                            "display": "inline-block"
+                                        }
+                                    },
+                                    {
+                                        "name": "text",
+                                        "style": {
+                                            "font-size": "12px",
+                                            "color": "white",
+                                            "font-family": "Roboto"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "row",
+                                "children": [
+                                    {
+                                        "name": "icon",
+                                        "style": {
+                                            "height": "50px",
+                                            "width": "50px",
+                                            "display": "inline-block"
+                                        }
+                                    },
+                                    {
+                                        "name": "text",
+                                        "style": {
+                                            "font-size": "12px",
+                                            "color": "white",
+                                            "font-family": "Roboto"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "row",
+                                "children": [
+                                    {
+                                        "name": "icon",
+                                        "style": {
+                                            "height": "50px",
+                                            "width": "50px",
+                                            "display": "inline-block"
+                                        }
+                                    },
+                                    {
+                                        "name": "text",
+                                        "style": {
+                                            "font-size": "12px",
+                                            "color": "white",
+                                            "font-family": "Roboto"
+                                        }
+                                    }
+                                ]
                             }
-                    }
-                ]
-        }
+                        ]
+                    ]
+                }
+            }
+
+/*
+fill: {
+    type: IMAGE/SOLID
+
+    // if image
+    imageRef = "22c4422dd975abae62c448816e7be0feac25b1e0"
+
+    // else 
+    color: #
 }

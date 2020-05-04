@@ -1591,15 +1591,15 @@ char* decodeKV(char* key, char* value) {
   char* out = malloc(100);
   switch(lookup(key)) {
     case K1:
-      sprintf(out, "<div class=\"%s\"", value);
+      sprintf(out, "<div class=\"%s\" ", value);
       printf("%s", out);
       break;
     case K2:
-      sprintf(out, ">\n%s\n", value);
+      sprintf(out, ">\n\t%s\n", value);
       printf("%s", out);
       break;
     default:
-      sprintf(out, "%s: %s;\n", key, value);
+      sprintf(out, "%s: %s; ", key, value);
   }
   return out;
 }
@@ -1609,7 +1609,7 @@ char* decodeObject(char* key, char* value) {
   switch(lookup(key)) {
     case OBJ1:
       out = malloc(sizeof("style=\"\"") + sizeof(value) + 2);
-      printf("%s %s\"", "style=\"", value);
+      printf("%s%s\"", "style=\"", value);
       break;
     default:
       out = "DEFAULT OBJECT\n";
