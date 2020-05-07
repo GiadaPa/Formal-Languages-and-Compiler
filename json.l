@@ -19,8 +19,7 @@ BOOLEAN true|false
 %%
 
 {STRING} { 
-        char* temp = strndup(yytext, strlen(yytext)-1);
-        yylval.str = strdup(++temp);
+        yylval.str = strndup(++yytext, strlen(yytext)-2);
         return STRING;
     }
 
