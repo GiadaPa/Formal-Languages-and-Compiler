@@ -18,7 +18,11 @@ BOOLEAN true|false
 
 %%
 
-{STRING} { yylval.str = strdup(yytext); return STRING;}
+{STRING} { 
+        char* temp = strndup(yytext, strlen(yytext)-1);
+        yylval.str = strdup(++temp);
+        return STRING;
+    }
 
 {NUMBER} { yylval.str = strdup(yytext); return NUMBER;}
 
@@ -44,3 +48,8 @@ BOOLEAN true|false
 }
 
 %%
+
+// opzione 1 -> yytext[yyleng-1]
+// opzione 2 -> strdup(strlen(yytext)-1)
+// incrementare con string++
+// 
