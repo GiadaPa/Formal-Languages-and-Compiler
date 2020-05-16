@@ -3,14 +3,28 @@
     "document": 
         {
             "name": "xiaomi-banner",
+            "absoluteBoundingBox": 
+                {
+                    "height": 963.0,
+                    "width": 1274.0,
+                    "right": 1040.0,
+                    "left": -284.0
+                },
             "children": 
                 [
                     {
                         "name": "banner",
+                        "absoluteBoundingBox": 
+                            {
+                                "height": 399.0,
+                                "width": 1000.0,
+                                "right": 1177.0,
+                                "left": -2.0
+                            },
                         "style": 
                             {
                                 "width": "1000px",
-                                "heght": "399px",
+                                "height": "399px",
                                 "display": "flex",
                                 "justify-content": "space-between",
                                 "font-family": "Roboto"
@@ -24,11 +38,18 @@
                             [
                                 {
                                     "name": "logo",
+                                    "absoluteBoundingBox": 
+                                        {
+                                            "height": 65.0,
+                                            "width": 65.0,
+                                            "right": 1202.0,
+                                            "left": 22.0
+                                        },
                                     "style": 
                                         {
                                             "top": "25px",
                                             "left": "25px",
-                                            "heght": "65px",
+                                            "height": "65px",
                                             "width": "65px",
                                             "padding-right":"15px"
                                         },
@@ -41,13 +62,28 @@
                                 },
                                 {
                                     "name": "title",
+                                    "absoluteBoundingBox": 
+                                        {
+                                            "height": 245.0,
+                                            "width": 338.0,
+                                            "right": 1235.0,
+                                            "left": 74.0
+                                        },
                                     "children": 
                                         [
                                             {
                                                 "name": "h1",
+                                                "absoluteBoundingBox": 
+                                                    {
+                                                        "height": 59.0,
+                                                        "width": 212.0,
+                                                        "right": 1298.0,
+                                                        "left": 74.0
+                                                    },
                                                 "style": 
                                                     {
                                                         "font-size": "50px",
+                                                        "font-weight": 900,
                                                         "color": "white",
                                                         "font-family": "Roboto"
                                                     },
@@ -55,9 +91,17 @@
                                             },
                                             {
                                                 "name": "h2",
+                                                "absoluteBoundingBox": 
+                                                    {
+                                                        "height": 47.0,
+                                                        "width": 238.0,
+                                                        "right": 1285.0,
+                                                        "left": 173.0
+                                                    },
                                                 "style": 
                                                     {
                                                         "font-size": "40px",
+                                                        "font-weight": 500,
                                                         "color": "white",
                                                         "font-family": "Roboto"
                                                     },
@@ -65,9 +109,17 @@
                                             },
                                             {
                                                 "name": "h1",
+                                                "absoluteBoundingBox": 
+                                                    {
+                                                        "height": 59.0,
+                                                        "width": 170.0,
+                                                        "right": 1319.0,
+                                                        "left": 260.0
+                                                    },
                                                 "style": 
                                                     {
                                                         "font-size": "50px",
+                                                        "font-weight": 900,
                                                         "color": "white",
                                                         "font-family": "Roboto"
                                                     },
@@ -78,6 +130,13 @@
                                 },
                                 {
                                     "name": "image",
+                                    "absoluteBoundingBox": 
+                                        {
+                                            "height": 350.0,
+                                            "width": 300.0,
+                                            "right": 1623.0,
+                                            "left": 22.0
+                                        },
                                     "style": 
                                         {
                                             "display": "absolute",
@@ -94,6 +153,13 @@
                                 },
                                 {
                                     "name": "icons",
+                                    "absoluteBoundingBox": 
+                                        {
+                                            "height": 50.0,
+                                            "width": 180.0,
+                                            "right": 1972.0,
+                                            "left": 63.0
+                                        },
                                     "style": 
                                         {
                                             "display": "flex",
@@ -104,10 +170,24 @@
                                         [
                                             {
                                                 "name": "row",
+                                                "absoluteBoundingBox": 
+                                                    {
+                                                        "height": 50.0,
+                                                        "width": 180.0,
+                                                        "right": 1972.0,
+                                                        "left": 63.0
+                                                    },
                                                 "children": 
                                                     [
                                                         {
                                                             "name": "icon",
+                                                            "absoluteBoundingBox": 
+                                                                {
+                                                                    "height": 50.0,
+                                                                    "width": 50.0,
+                                                                    "right": 1972.0,
+                                                                    "left": 63.0
+                                                                },
                                                             "style": 
                                                                 {
                                                                     "height": "50px",
@@ -123,9 +203,17 @@
                                                         },
                                                         {
                                                             "name": "text",
+                                                            "absoluteBoundingBox": 
+                                                                {
+                                                                    "height": 42.0,
+                                                                    "width": 86.0,
+                                                                    "right": 2033.0,
+                                                                    "left": 67.0
+                                                                },
                                                             "style": 
                                                                 {
                                                                     "font-size": "12px",
+                                                                    "font-weight": 400,
                                                                     "color": "white",
                                                                     "font-family": "Roboto"
                                                                 },
@@ -136,10 +224,24 @@
                                             },
                                             {
                                                 "name": "row",
+                                                "absoluteBoundingBox": 
+                                                    {
+                                                        "height": 50.0,
+                                                        "width": 180.0,
+                                                        "right": 1972.0,
+                                                        "left": 136.0
+                                                    },
                                                 "children": 
                                                     [
                                                         {
                                                             "name": "icon",
+                                                            "absoluteBoundingBox": 
+                                                                {
+                                                                    "height": 50.0,
+                                                                    "width": 50.0,
+                                                                    "right": 1972.0,
+                                                                    "left": 136.0
+                                                                },
                                                             "style": 
                                                                 {
                                                                     "height": "50px",
@@ -155,9 +257,17 @@
                                                         },
                                                         {
                                                             "name": "text",
+                                                            "absoluteBoundingBox": 
+                                                                {
+                                                                    "height": 28.0,
+                                                                    "width": 100.0,
+                                                                    "right": 2033.0,
+                                                                    "left": 147.0
+                                                                },
                                                             "style": 
                                                                 {
                                                                     "font-size": "12px",
+                                                                    "font-weight":400,
                                                                     "color": "white",
                                                                     "font-family": "Roboto"
                                                                 },
@@ -168,10 +278,24 @@
                                             },
                                             {
                                                 "name": "row",
+                                                "absoluteBoundingBox": 
+                                                    {
+                                                        "height": 50.0,
+                                                        "width": 180.0,
+                                                        "right": 1972.0,
+                                                        "left": 209.0
+                                                    },
                                                 "children": 
                                                     [
                                                         {
                                                             "name": "icon",
+                                                            "absoluteBoundingBox": 
+                                                                {
+                                                                    "height": 50.0,
+                                                                    "width": 50.0,
+                                                                    "right": 1972.0,
+                                                                    "left": 209.0
+                                                                },
                                                             "style": 
                                                                 {
                                                                     "height": "50px",
@@ -187,9 +311,17 @@
                                                         },
                                                         {
                                                             "name": "text",
+                                                            "absoluteBoundingBox": 
+                                                                {
+                                                                    "height": 28.0,
+                                                                    "width": 36.0,
+                                                                    "right": 2033.0,
+                                                                    "left": 220.0
+                                                                },
                                                             "style": 
                                                                 {
                                                                     "font-size": "12px",
+                                                                    "font-weight":400,
                                                                     "color": "white",
                                                                     "font-family": "Roboto"
                                                                 },
@@ -200,10 +332,24 @@
                                             },
                                             {
                                                 "name": "row",
+                                                "absoluteBoundingBox": 
+                                                    {
+                                                        "height": 50.0,
+                                                        "width": 180.0,
+                                                        "right": 1972.0,
+                                                        "left": 282.0
+                                                    },
                                                 "children": 
                                                     [
                                                         {
                                                             "name": "icon",
+                                                            "absoluteBoundingBox": 
+                                                                {
+                                                                    "height": 50.0,
+                                                                    "width": 50.0,
+                                                                    "right": 1972.0,
+                                                                    "left": 282.0
+                                                                },
                                                             "style": 
                                                                 {
                                                                     "height": "50px",
@@ -219,9 +365,17 @@
                                                         },
                                                         {
                                                             "name": "text",
+                                                            "absoluteBoundingBox": 
+                                                                {
+                                                                    "height": 42.0,
+                                                                    "width": 104.0,
+                                                                    "right": 2033.0,
+                                                                    "left": 286.0
+                                                                },
                                                             "style": 
                                                                 {
                                                                     "font-size": "12px",
+                                                                    "font-weight":400,
                                                                     "color": "white",
                                                                     "font-family": "Roboto"
                                                                 },
