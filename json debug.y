@@ -50,40 +50,48 @@
 
 start: object { printf($1); }
 
-object: OBJECT_BEGIN members OBJECT_END { 
-              // printf("object\n");
+object: OBJECT_BEGIN OBJECT_END { printf("ERROR {}"); }
+          |  OBJECT_BEGIN members OBJECT_END { 
+              printf("%s PRIMA object\n", $$);
               $$ = checkDIV($2); 
+              printf("%s DOPO object\n", $$);
             }
           ;
-
 members: pair { 
-              // printf("pair\n");
+              printf("%s PRIMA Pair\n", $$);
               $$ = $1; 
+              printf("%s DOPO Pair\n", $$);
             }
           | pair COMMA members { 
-              // printf("members\n");
+              printf("%s PRIMA Members\n", $$);
+
               strcat($1, " ");
               strcat($1, $3);
               $$ = $1;
+
+              printf("%s DOPO Members\n", $$);
             }
           ;
-
 pair: STRING COLON value {
-              // printf("KV\n");
-              $$ = decodeKV($1, $3);
+              printf("%s PRIMA KV\n", $$);
+              $$ = decodeKV($1, $3); 
+              printf("%s DOPO KV\n", $$);
             }
           | STRING COLON object {
-              // printf("KObj\n");
+              printf("%s PRIMA KObj\n", $$);
               $$ = decodeObject($1, $3);
+              printf("%s DOPO KObj\n", $$);
+
             }
           | STRING COLON array { 
-            printf("array\n");
+            printf("%s PRIMA Array\n", $$);
             $$ = $3; 
+            printf("%s DOPO Array\n", $$);
             }
           ;
-
-array: ARRAY_BEGIN elements ARRAY_END { $$ = $2; };
-
+array: ARRAY_BEGIN ARRAY_END { printf("ERROR []\n"); }
+          | ARRAY_BEGIN elements ARRAY_END { $$ = $2; }
+          ;
 elements: value { $$ = $1; }
           | object { $$ = $1;  }
           | array { $$ = $1;  }
@@ -142,11 +150,13 @@ char* decodeKV(char* key, char* value) {
       strcat(out, "<div class=\"");
       strcat(out, value);
       strcat(out, "\" ");
+      // printf("%s\n", out);
       break;
     case CONTENT:
       out = malloc(strlen(value) + strlen(">") + 1);
       strcat(out, ">");
       strcat(out, value);
+      // printf("%s\n", out);
       break;
     default:
       out = malloc(strlen(key) + strlen(": ;") + strlen(value) + 1);
@@ -154,6 +164,7 @@ char* decodeKV(char* key, char* value) {
       strcat(out, ": ");
       strcat(out, value);
       strcat(out, ";");
+      // printf("%s\n", out);
   }
 
   return out;
@@ -162,12 +173,15 @@ char* decodeKV(char* key, char* value) {
 char* decodeObject(char* key, char* values) {
   char* out;
 
+  // printf("Obj key: %s\n", key);
+
   switch(lookup(key)) {
     case STYLE:
       out = malloc(strlen("style=\"\" ") + strlen(values) + 1);
       strcat(out, "style=\"");
       strcat(out, values);
       strcat(out, "\" ");
+      // printf("%s STYLE\n", out);
       break;
   }
 
@@ -176,10 +190,13 @@ char* decodeObject(char* key, char* values) {
 
 char* checkDIV(char* str) {
   char* out;
+  // printf("%s\nOBJ\n", str);
   if( strncmp("<div", str, 4) == 0) {
+    // printf("is-div");
     out = malloc(strlen(str) + strlen("</div>") + 1);
     strcat(out, str);
     strcat(out, "</div>");
+    // printf("%s\n", out);
   } else {
     return str;
   }
