@@ -1,8 +1,36 @@
 {
-    "name": "x",
+    "name": 1,
     "style": {
         "width": 0,
-        "height": 1
+        "height": 4
     },
-    "content": "ciao"
+    "characters": "a",
+    "children": [
+        {
+            "name": 2,
+            "style": {
+                "width": 0,
+                "height": 4
+            },
+            "characters": "",
+            "children": [
+                {
+                    "name": 3,
+                    "style": {
+                        "width": 0,
+                        "height": 4
+                    },
+                    "characters": ""
+                },
+                {
+                    "name": 4,
+                    "style": {
+                        "width": 0,
+                        "height": 4
+                    },
+                    "characters": ""
+                }
+            ]
+        }
+    ]
 }

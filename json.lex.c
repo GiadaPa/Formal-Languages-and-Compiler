@@ -749,57 +749,60 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 21 "json.l"
-{ yylval.str = strdup(yytext); return STRING;}
+{ 
+        yylval.str = strndup(++yytext, strlen(yytext)-2);
+        return STRING;
+    }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 23 "json.l"
+#line 26 "json.l"
 { yylval.str = strdup(yytext); return NUMBER;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 25 "json.l"
+#line 28 "json.l"
 { yylval.str = strdup(yytext); return BOOLEAN;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 27 "json.l"
+#line 30 "json.l"
 { return OBJECT_BEGIN;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 29 "json.l"
+#line 32 "json.l"
 { return OBJECT_END;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 31 "json.l"
+#line 34 "json.l"
 { return ARRAY_BEGIN;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 33 "json.l"
+#line 36 "json.l"
 { return ARRAY_END;};
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 35 "json.l"
+#line 38 "json.l"
 { return COMMA;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 37 "json.l"
+#line 40 "json.l"
 { return COLON;}
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 39 "json.l"
+#line 42 "json.l"
 /* ignore whitespace */{;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 41 "json.l"
+#line 44 "json.l"
 {
     printf("Unexpected: %c\nExiting...\n", *yytext);
     exit(0);
@@ -807,10 +810,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 46 "json.l"
+#line 49 "json.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 814 "json.lex.c"
+#line 817 "json.lex.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1815,6 +1818,11 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 46 "json.l"
+#line 49 "json.l"
 
+
+// opzione 1 -> yytext[yyleng-1]
+// opzione 2 -> strdup(strlen(yytext)-1)
+// incrementare con string++
+// 
 

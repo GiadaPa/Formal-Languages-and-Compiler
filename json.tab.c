@@ -72,25 +72,28 @@
   #include <string.h>
   #include "json.lex.c"
 
-  #define K1 0
-  #define K2 1
-  #define OBJ1 2
+  #define YYDEBUG 1
+
+  #define CLASS 0
+  #define CONTENT 1
+  #define STYLE 2
 
   typedef struct { char *key; int val; } t_symstruct;
 
   t_symstruct lookuptable[] = {
-      { "\"name\"", K1 },
-      { "\"content\"", K2 },
-      { "\"style\"", OBJ1 },
+      { "name", CLASS },
+      { "characters", CONTENT },
+      { "style", STYLE },
   };
 
   #define NKEYS (sizeof(lookuptable)/sizeof(t_symstruct))
 
   char* decodeKV(char* key, char* value);
   char* decodeObject(char* key, char* value);
+  char* checkDIV(char* str);
 
 
-#line 94 "json.tab.c"
+#line 97 "json.tab.c"
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
@@ -145,11 +148,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 38 "json.y"
+#line 43 "json.y"
 
   char *str;
 
-#line 153 "json.tab.c"
+#line 156 "json.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -399,16 +402,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  7
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   26
+#define YYLAST   32
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  12
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  7
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  15
+#define YYNRULES  19
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  25
+#define YYNSTATES  31
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   266
@@ -455,8 +458,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    44,    44,    45,    47,    48,    53,    54,    55,    57,
-      58,    60,    61,    63,    64,    65
+       0,    51,    53,    54,    60,    65,    75,    80,    86,    92,
+      93,    95,    96,    97,    98,   103,   108,   114,   115,   116
 };
 #endif
 
@@ -482,10 +485,10 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -4
+#define YYPACT_NINF -9
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-4)))
+  (!!((Yystate) == (-9)))
 
 #define YYTABLE_NINF -1
 
@@ -496,9 +499,10 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       7,     8,    14,     6,    -4,    10,     5,    -4,     4,    -4,
-      15,    -4,    -4,    -4,    -3,    -4,    -4,    -4,    -4,    -4,
-      11,    12,    -4,     0,    -4
+       9,    10,    20,    -5,    -9,    13,    12,    -9,     6,    -9,
+      19,    -9,    -9,    -9,    -2,    -9,    -9,    -9,    -9,    -9,
+      14,    15,    17,    18,     6,     6,    -9,     6,    -9,    -9,
+      -9
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -507,20 +511,21 @@ static const yytype_int8 yypact[] =
 static const yytype_uint8 yydefact[] =
 {
        0,     0,     0,     0,     2,     0,     4,     1,     0,     3,
-       0,    14,    13,    15,     0,     7,     8,     6,     5,     9,
-       0,    11,    10,     0,    12
+       0,    18,    17,    19,     0,     7,     8,     6,     5,     9,
+      12,    13,     0,    11,     0,     0,    10,     0,    15,    16,
+      14
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -4,    13,    16,    -4,    -4,     1,    17
+      -9,     0,    21,    -9,    22,    -8,    24
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     5,     6,    16,    20,    21
+      -1,    20,     5,     6,    21,    22,    23
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -528,16 +533,18 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      11,    12,    13,    11,    12,    13,    19,    11,    12,    13,
-       1,    14,     3,     1,     7,    10,     4,     8,     9,     3,
-      22,    15,    23,     0,    24,    17,    18
+       2,    11,    12,    13,     1,    14,     8,    19,    15,    11,
+      12,    13,     1,    14,     3,     1,    28,    29,     4,    30,
+       7,     9,    10,     3,    24,    25,    26,     0,    27,     0,
+      16,    18,    17
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,     4,     5,     3,     4,     5,     9,     3,     4,     5,
-       6,     7,     4,     6,     0,    10,     8,    11,     8,     4,
-       9,     8,    10,    -1,    23,     8,    10
+       0,     3,     4,     5,     6,     7,    11,     9,     8,     3,
+       4,     5,     6,     7,     4,     6,    24,    25,     8,    27,
+       0,     8,    10,     4,    10,    10,     9,    -1,    10,    -1,
+       8,    10,     8
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -546,21 +553,22 @@ static const yytype_uint8 yystos[] =
 {
        0,     6,    13,     4,     8,    14,    15,     0,    11,     8,
       10,     3,     4,     5,     7,    13,    16,    18,    14,     9,
-      17,    18,     9,    10,    17
+      13,    16,    17,    18,    10,    10,     9,    10,    17,    17,
+      17
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
        0,    12,    13,    13,    14,    14,    15,    15,    15,    16,
-      16,    17,    17,    18,    18,    18
+      16,    17,    17,    17,    17,    17,    17,    18,    18,    18
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
        0,     2,     2,     3,     1,     3,     3,     3,     3,     2,
-       3,     1,     3,     1,     1,     1
+       3,     1,     1,     1,     3,     3,     3,     1,     1,     1
 };
 
 
@@ -1245,94 +1253,156 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 44 "json.y"
-    { printf("hoho"); }
-#line 1251 "json.tab.c"
+#line 53 "json.y"
+    { printf("ERROR {}"); }
+#line 1259 "json.tab.c"
     break;
 
   case 3:
-#line 45 "json.y"
-    { checkDIV((yyvsp[-1].str)); (yyval.str) = (yyvsp[-1].str); }
-#line 1257 "json.tab.c"
+#line 54 "json.y"
+    { 
+              printf("%s PRIMA object\n", (yyval.str));
+              (yyval.str) = checkDIV((yyvsp[-1].str)); 
+              printf("%s DOPO object\n", (yyval.str));
+            }
+#line 1269 "json.tab.c"
     break;
 
   case 4:
-#line 47 "json.y"
-    { (yyval.str) = (yyvsp[0].str); }
-#line 1263 "json.tab.c"
+#line 60 "json.y"
+    { 
+              printf("%s PRIMA Pair\n", (yyval.str));
+              (yyval.str) = (yyvsp[0].str); 
+              printf("%s DOPO Pair\n", (yyval.str));
+            }
+#line 1279 "json.tab.c"
     break;
 
   case 5:
-#line 48 "json.y"
+#line 65 "json.y"
     { 
-              (yyval.str) = malloc(sizeof((yyvsp[-2].str)) + sizeof((yyvsp[0].str)) + 2);
-              sprintf((yyval.str), "%s %s", (yyvsp[-2].str), (yyvsp[0].str));
+              printf("%s PRIMA Members\n", (yyval.str));
+
+              strcat((yyvsp[-2].str), " ");
+              strcat((yyvsp[-2].str), (yyvsp[0].str));
+              (yyval.str) = (yyvsp[-2].str);
+
+              printf("%s DOPO Members\n", (yyval.str));
             }
-#line 1272 "json.tab.c"
+#line 1293 "json.tab.c"
     break;
 
   case 6:
-#line 53 "json.y"
-    { (yyval.str) = decodeKV((yyvsp[-2].str), (yyvsp[0].str)); }
-#line 1278 "json.tab.c"
+#line 75 "json.y"
+    {
+              printf("%s PRIMA KV\n", (yyval.str));
+              (yyval.str) = decodeKV((yyvsp[-2].str), (yyvsp[0].str)); 
+              printf("%s DOPO KV\n", (yyval.str));
+            }
+#line 1303 "json.tab.c"
     break;
 
   case 7:
-#line 54 "json.y"
-    { (yyval.str) = decodeObject((yyvsp[-2].str), (yyvsp[0].str));  }
-#line 1284 "json.tab.c"
-    break;
+#line 80 "json.y"
+    {
+              printf("%s PRIMA KObj\n", (yyval.str));
+              (yyval.str) = decodeObject((yyvsp[-2].str), (yyvsp[0].str));
+              printf("%s DOPO KObj\n", (yyval.str));
 
-  case 8:
-#line 55 "json.y"
-    { printf("hoho");  }
-#line 1290 "json.tab.c"
-    break;
-
-  case 9:
-#line 57 "json.y"
-    { printf("hoho"); }
-#line 1296 "json.tab.c"
-    break;
-
-  case 10:
-#line 58 "json.y"
-    { printf("hoho"); }
-#line 1302 "json.tab.c"
-    break;
-
-  case 11:
-#line 60 "json.y"
-    { printf("hoho"); }
-#line 1308 "json.tab.c"
-    break;
-
-  case 12:
-#line 61 "json.y"
-    { printf("hoho");  }
+            }
 #line 1314 "json.tab.c"
     break;
 
-  case 13:
-#line 63 "json.y"
+  case 8:
+#line 86 "json.y"
+    { 
+            printf("%s PRIMA Array\n", (yyval.str));
+            (yyval.str) = (yyvsp[0].str); 
+            printf("%s DOPO Array\n", (yyval.str));
+            }
+#line 1324 "json.tab.c"
+    break;
+
+  case 9:
+#line 92 "json.y"
+    { printf("ERROR []\n"); }
+#line 1330 "json.tab.c"
+    break;
+
+  case 10:
+#line 93 "json.y"
+    { (yyval.str) = (yyvsp[-1].str); }
+#line 1336 "json.tab.c"
+    break;
+
+  case 11:
+#line 95 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1320 "json.tab.c"
+#line 1342 "json.tab.c"
+    break;
+
+  case 12:
+#line 96 "json.y"
+    { (yyval.str) = (yyvsp[0].str);  }
+#line 1348 "json.tab.c"
+    break;
+
+  case 13:
+#line 97 "json.y"
+    { (yyval.str) = (yyvsp[0].str);  }
+#line 1354 "json.tab.c"
     break;
 
   case 14:
-#line 64 "json.y"
-    { (yyval.str) = (yyvsp[0].str); }
-#line 1326 "json.tab.c"
+#line 98 "json.y"
+    { 
+              strcat((yyvsp[-2].str), " ");
+              strcat((yyvsp[-2].str), (yyvsp[0].str));
+              (yyval.str) = (yyvsp[-2].str);
+            }
+#line 1364 "json.tab.c"
     break;
 
   case 15:
-#line 65 "json.y"
+#line 103 "json.y"
+    { 
+              strcat((yyvsp[-2].str), " ");
+              strcat((yyvsp[-2].str), (yyvsp[0].str));
+              (yyval.str) = (yyvsp[-2].str);
+            }
+#line 1374 "json.tab.c"
+    break;
+
+  case 16:
+#line 108 "json.y"
+    { 
+              strcat((yyvsp[-2].str), " ");
+              strcat((yyvsp[-2].str), (yyvsp[0].str));
+              (yyval.str) = (yyvsp[-2].str);
+            }
+#line 1384 "json.tab.c"
+    break;
+
+  case 17:
+#line 114 "json.y"
+    { (yyval.str) = (yyvsp[0].str); }
+#line 1390 "json.tab.c"
+    break;
+
+  case 18:
+#line 115 "json.y"
+    { (yyval.str) = (yyvsp[0].str); }
+#line 1396 "json.tab.c"
+    break;
+
+  case 19:
+#line 116 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1332 "json.tab.c"
+#line 1402 "json.tab.c"
     break;
 
 
-#line 1336 "json.tab.c"
+#line 1406 "json.tab.c"
 
       default: break;
     }
@@ -1564,7 +1634,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 68 "json.y"
+#line 119 "json.y"
 
 
 void yyerror (char* s) {
@@ -1573,6 +1643,9 @@ void yyerror (char* s) {
 
 int main() {
   yyparse();
+  #if YYDEBUG
+    yydebug = 1;
+  #endif
   return 0;
 }
 
@@ -1588,38 +1661,64 @@ int lookup(char *key)
 }
 
 char* decodeKV(char* key, char* value) {
-  char* out = malloc(100);
-  switch(lookup(key)) {
-    case K1:
-      sprintf(out, "<div class=\"%s\" ", value);
-      printf("%s", out);
-      break;
-    case K2:
-      sprintf(out, ">\n\t%s\n", value);
-      printf("%s", out);
-      break;
-    default:
-      sprintf(out, "%s: %s; ", key, value);
-  }
-  return out;
-}
-
-char* decodeObject(char* key, char* value) {
   char* out;
+
   switch(lookup(key)) {
-    case OBJ1:
-      out = malloc(sizeof("style=\"\"") + sizeof(value) + 2);
-      printf("%s%s\"", "style=\"", value);
+    case CLASS:
+      out = malloc(strlen(value) + strlen("<div class=\"\" ") + 1);
+      strcat(out, "<div class=\"");
+      strcat(out, value);
+      strcat(out, "\" ");
+      // printf("%s\n", out);
+      break;
+    case CONTENT:
+      out = malloc(strlen(value) + strlen(">") + 1);
+      strcat(out, ">");
+      strcat(out, value);
+      // printf("%s\n", out);
       break;
     default:
-      out = "DEFAULT OBJECT\n";
+      out = malloc(strlen(key) + strlen(": ;") + strlen(value) + 1);
+      strcat(out, key);
+      strcat(out, ": ");
+      strcat(out, value);
+      strcat(out, ";");
+      // printf("%s\n", out);
   }
 
   return out;
 }
 
-void checkDIV(char* str) {
+char* decodeObject(char* key, char* values) {
+  char* out;
+
+  // printf("Obj key: %s\n", key);
+
+  switch(lookup(key)) {
+    case STYLE:
+      out = malloc(strlen("style=\"\" ") + strlen(values) + 1);
+      strcat(out, "style=\"");
+      strcat(out, values);
+      strcat(out, "\" ");
+      // printf("%s STYLE\n", out);
+      break;
+  }
+
+  return out;
+}
+
+char* checkDIV(char* str) {
+  char* out;
+  // printf("%s\nOBJ\n", str);
   if( strncmp("<div", str, 4) == 0) {
-    printf("</div>");
-  };
+    // printf("is-div");
+    out = malloc(strlen(str) + strlen("</div>") + 1);
+    strcat(out, str);
+    strcat(out, "</div>");
+    // printf("%s\n", out);
+  } else {
+    return str;
+  }
+
+  return out;
 }
