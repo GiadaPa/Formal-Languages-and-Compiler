@@ -1,8 +1,14 @@
 {
     "name": 1,
-    "style": {
-        "width": 0,
-        "height": 4
+    "fill": {
+        "type": "solid",
+        "background": "silver"
+    },
+    "absoluteBoundingBox": {
+        "height": 28.0,
+        "width": 100.0,
+        "right": 2033.0,
+        "left": 147.0
     },
     "characters": "a",
     "children": [
