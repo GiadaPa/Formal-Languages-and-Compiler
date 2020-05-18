@@ -11,7 +11,7 @@ DIGITS {DIGIT}+
 INT -?{DIGITS}
 FRAC \.{DIGITS}
 NUMBER {INT}|{INT}{FRAC}
-LETTER [a-zA-Z]
+LETTER ([a-zA-Z]*-[a-zA-Z]+)
 LETTERS {LETTER}+
 STRING \"\"|\"({LETTERS}|{NUMBER})+\"
 BOOLEAN true|false
@@ -47,8 +47,3 @@ BOOLEAN true|false
 }
 
 %%
-
-// opzione 1 -> yytext[yyleng-1]
-// opzione 2 -> strdup(strlen(yytext)-1)
-// incrementare con string++
-// 
