@@ -11,9 +11,9 @@ DIGITS {DIGIT}+
 INT -?{DIGITS}
 FRAC \.{DIGITS}
 NUMBER {INT}|{INT}{FRAC}
-LETTER [a-zA-Z]+[0-9]*(\-)?[a-zA-Z]+[0-9]*
+LETTER [a-zA-Z]
 LETTERS {LETTER}+
-STRING \"\"|\"({LETTERS}|{NUMBER})+\"
+STRING \"\"|\"({LETTERS}{NUMBER}*(\-)?{LETTERS}{NUMBER}*)+\"
 BOOLEAN true|false
 
 %%
