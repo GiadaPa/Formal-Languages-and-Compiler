@@ -255,10 +255,10 @@ char* decodeObject(char* key, char* values) {
 
   switch(lookup(key)) {
     case ABSOLUTE:
-      out = malloc(strlen("style=\"position: absolute; \" ") + strlen(values) + 1);
-      strcat(out, "style=\"position: absolute; ");
+      out = malloc(strlen("position: absolute; ") + strlen(values) + 1);
+      strcat(out, "position: absolute; ");
       strcat(out, values);
-      strcat(out, "\" ");
+      strcat(out, " ");
       break;
     case STYLE:
       out = malloc(strlen("style=\"\" ") + strlen(values) + 1);
@@ -266,12 +266,8 @@ char* decodeObject(char* key, char* values) {
       strcat(out, values);
       strcat(out, "\" ");
       break;
-    case FILL:
-      out = malloc(strlen("style=\"\" ") + strlen(values) + 1);
-      strcat(out, "style=\"");
-      strcat(out, values);
-      strcat(out, "\" ");
-      break;
+    default:
+      out = values;
   }
 
   return out;
