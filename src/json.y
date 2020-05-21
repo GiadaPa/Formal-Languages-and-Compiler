@@ -7,11 +7,13 @@
   #define CONTENT 1
   #define TYPE 2
   #define IMAGE 3
-  #define COLOR 4
-  #define ABSOLUTE 5
-  #define STYLE 6
-  #define FILL 7
-  #define CHILD 8
+  #define BGCOLOR 4
+  #define SIZE 5
+  #define ABSOLUTE 6
+  #define STYLE 7
+  #define FILL 8
+  #define CHILD 9
+  
 
   typedef struct { char *key; int val; } t_symstruct;
 
@@ -20,7 +22,13 @@
       { "characters", CONTENT },
       { "type", TYPE },
       { "imageRef", IMAGE },
-      { "background", COLOR },
+      { "background-color", BGCOLOR },
+      { "height", SIZE },
+      { "width", SIZE },
+      { "top", SIZE },
+      { "bottom", SIZE },
+      { "left", SIZE },
+      { "right", SIZE },
       { "absoluteBoundingBox", ABSOLUTE },
       { "style", STYLE },
       { "fill", FILL },
@@ -62,7 +70,7 @@
 %%
 
 start: object { 
-              // printf($1);
+              printf($1);
               generatedOutput = $1;
             }
 
@@ -78,9 +86,11 @@ members: pair {
             }
           | pair COMMA members { 
               // printf("members\n");
-              strcat($1, " ");
-              strcat($1, $3);
-              $$ = $1;
+              char* result = malloc(strlen($1) + strlen($3) + strlen(" ") + 1);
+              strcat(result, $1);
+              strcat(result, " ");
+              strcat(result, $3);
+              $$ = result;
             }
           ;
 
@@ -93,8 +103,8 @@ pair: STRING COLON value {
               $$ = decodeObject($1, $3);
             }
           | STRING COLON array { 
-            // printf("array\n");
-            $$ = decodeArray($1, $3); 
+              // printf("array\n");
+              $$ = decodeArray($1, $3); 
             }
           ;
 
@@ -103,20 +113,26 @@ array: ARRAY_BEGIN elements ARRAY_END { $$ = $2; };
 elements: value { $$ = $1; }
           | object { $$ = $1;  }
           | array { $$ = $1;  }
-          | value COMMA elements { 
-              strcat($1, " ");
-              strcat($1, $3);
-              $$ = $1;
+          | value COMMA elements {
+              char* result = malloc(strlen($1) + strlen($3) + strlen(" ") + 1);
+              strcat(result, $1);
+              strcat(result, " ");
+              strcat(result, $3);
+              $$ = result;
             }
           | object COMMA elements { 
-              strcat($1, " ");
-              strcat($1, $3);
-              $$ = $1;
+              char* result = malloc(strlen($1) + strlen($3) + strlen(" ") + 1);
+              strcat(result, $1);
+              strcat(result, " ");
+              strcat(result, $3);
+              $$ = result;
             }
           | array COMMA elements { 
-              strcat($1, " ");
-              strcat($1, $3);
-              $$ = $1;
+              char* result = malloc(strlen($1) + strlen($3) + strlen(" ") + 1);
+              strcat(result, $1);
+              strcat(result, " ");
+              strcat(result, $3);
+              $$ = result;
             }
           ;
 value: STRING { $$ = $1; }
@@ -197,11 +213,11 @@ char* decodeKV(char* key, char* value) {
       break;
     case TYPE:
       if (strcmp(value, "image") == 0) {
-        out = malloc(strlen("background-image:") + 1);
-        strcat(out, "background-image:");
+        out = malloc(strlen("background-image: ") + 1);
+        strcat(out, "background-image: ");
       } else if (strcmp(value, "solid") == 0) {
-        out = malloc(strlen("background-color:") + 1);
-        strcat(out, "background-color:");
+        out = malloc(strlen("background-color: ") + 1);
+        strcat(out, "background-color: ");
       }
       break;
     case IMAGE:
@@ -210,10 +226,17 @@ char* decodeKV(char* key, char* value) {
       strcat(out, value);
       strcat(out, "');");
       break;
-    case COLOR:
+    case BGCOLOR:
       out = malloc(strlen(";") + strlen(value) + 1);
       strcat(out, value);
       strcat(out, ";");
+      break;
+    case SIZE:
+      out = malloc(strlen(key) + strlen(value) + strlen(": px;") + 1);
+      strcat(out, key);
+      strcat(out, ": ");
+      strcat(out, value);
+      strcat(out, "px;");
       break;
     default:
       out = malloc(strlen(key) + strlen(": ;") + strlen(value) + 1);
@@ -221,6 +244,7 @@ char* decodeKV(char* key, char* value) {
       strcat(out, ": ");
       strcat(out, value);
       strcat(out, ";");
+      break;
   }
 
   return out;
@@ -231,8 +255,8 @@ char* decodeObject(char* key, char* values) {
 
   switch(lookup(key)) {
     case ABSOLUTE:
-      out = malloc(strlen("style=\"display: absolute; \" ") + strlen(values) + 1);
-      strcat(out, "style=\"display: absolute; ");
+      out = malloc(strlen("style=\"position: absolute; \" ") + strlen(values) + 1);
+      strcat(out, "style=\"position: absolute; ");
       strcat(out, values);
       strcat(out, "\" ");
       break;
@@ -258,7 +282,6 @@ char* decodeArray(char* key, char* value) {
 
   switch(lookup(key)) {
     case CHILD:
-      out = malloc(strlen(value) + 1);
       out = value;
       break;
   }
@@ -273,7 +296,7 @@ char* checkDIV(char* str) {
     strcat(out, str);
     strcat(out, "</div>");
   } else {
-    return str;
+    out = str;
   }
 
   return out;

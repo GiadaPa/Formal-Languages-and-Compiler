@@ -6,6 +6,7 @@
         "right": 1040.0,
         "left": -284.0
     },
+    "characters": "",
     "children": [
         {
             "name": "banner",
@@ -17,15 +18,16 @@
             },
             "style": {
                 "width": "1000px",
-                "height": "399px",
+                "height": "3px",
                 "display": "flex",
                 "justify-content": "space-between",
                 "font-family": "Roboto"
             },
             "fill": {
                 "type": "solid",
-                "color": "#630978"
+                "background-color": "#630978"
             },
+            "characters": "",
             "children": [
                 {
                     "name": "logo",
@@ -56,6 +58,7 @@
                         "right": 1235.0,
                         "left": 74.0
                     },
+                    "characters": "",
                     "children": [
                         {
                             "name": "h1",
@@ -105,8 +108,7 @@
                             },
                             "characters": "2650$"
                         }
-                    ],
-                    "characters": ""
+                    ]
                 },
                 {
                     "name": "image",
@@ -142,6 +144,7 @@
                         "flex-direction": "column",
                         "padding-top": "15px"
                     },
+                    "characters": "",
                     "children": [
                         {
                             "name": "row",
@@ -151,6 +154,7 @@
                                 "right": 1972.0,
                                 "left": 63.0
                             },
+                            "characters": "",
                             "children": [
                                 {
                                     "name": "icon",
@@ -187,8 +191,7 @@
                                     },
                                     "characters": " Battery super power 6000mA/h"
                                 }
-                            ],
-                            "characters": ""
+                            ]
                         },
                         {
                             "name": "row",
@@ -198,6 +201,7 @@
                                 "right": 1972.0,
                                 "left": 136.0
                             },
+                            "characters": "",
                             "children": [
                                 {
                                     "name": "icon",
@@ -234,8 +238,7 @@
                                     },
                                     "characters": "Fingerprint underneath the screen"
                                 }
-                            ],
-                            "characters": ""
+                            ]
                         },
                         {
                             "name": "row",
@@ -245,6 +248,7 @@
                                 "right": 1972.0,
                                 "left": 209.0
                             },
+                            "characters": "",
                             "children": [
                                 {
                                     "name": "icon",
@@ -281,8 +285,7 @@
                                     },
                                     "characters": "RAM 1 RAM 2"
                                 }
-                            ],
-                            "characters": ""
+                            ]
                         },
                         {
                             "name": "row",
@@ -292,6 +295,7 @@
                                 "right": 1972.0,
                                 "left": 282.0
                             },
+                            "characters": "",
                             "children": [
                                 {
                                     "name": "icon",
@@ -328,15 +332,11 @@
                                     },
                                     "characters": "New generation camera w/ fish eye"
                                 }
-                            ],
-                            "characters": ""
+                            ]
                         }
-                    ],
-                    "characters": ""
+                    ]
                 }
-            ],
-            "characters": ""
+            ]
         }
-    ],
-    "characters": ""
+    ]
 }

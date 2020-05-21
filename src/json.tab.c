@@ -76,11 +76,13 @@
   #define CONTENT 1
   #define TYPE 2
   #define IMAGE 3
-  #define COLOR 4
-  #define ABSOLUTE 5
-  #define STYLE 6
-  #define FILL 7
-  #define CHILD 8
+  #define BGCOLOR 4
+  #define SIZE 5
+  #define ABSOLUTE 6
+  #define STYLE 7
+  #define FILL 8
+  #define CHILD 9
+  
 
   typedef struct { char *key; int val; } t_symstruct;
 
@@ -89,7 +91,13 @@
       { "characters", CONTENT },
       { "type", TYPE },
       { "imageRef", IMAGE },
-      { "background", COLOR },
+      { "background-color", BGCOLOR },
+      { "height", SIZE },
+      { "width", SIZE },
+      { "top", SIZE },
+      { "bottom", SIZE },
+      { "left", SIZE },
+      { "right", SIZE },
       { "absoluteBoundingBox", ABSOLUTE },
       { "style", STYLE },
       { "fill", FILL },
@@ -106,7 +114,7 @@
   char* generatedOutput;
 
 
-#line 110 "json.tab.c"
+#line 118 "json.tab.c"
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
@@ -161,11 +169,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 56 "json.y"
+#line 64 "json.y"
 
   char *str;
 
-#line 169 "json.tab.c"
+#line 177 "json.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -471,8 +479,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    64,    64,    69,    75,    79,    87,    91,    95,   101,
-     103,   104,   105,   106,   111,   116,   122,   123,   124
+       0,    72,    72,    77,    83,    87,    97,   101,   105,   111,
+     113,   114,   115,   116,   123,   130,   138,   139,   140
 };
 #endif
 
@@ -1261,144 +1269,152 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 64 "json.y"
+#line 72 "json.y"
     { 
-              // printf($1);
+              printf((yyvsp[0].str));
               generatedOutput = (yyvsp[0].str);
             }
-#line 1270 "json.tab.c"
+#line 1278 "json.tab.c"
     break;
 
   case 3:
-#line 69 "json.y"
+#line 77 "json.y"
     { 
               // printf("object\n");
               (yyval.str) = checkDIV((yyvsp[-1].str)); 
             }
-#line 1279 "json.tab.c"
+#line 1287 "json.tab.c"
     break;
 
   case 4:
-#line 75 "json.y"
+#line 83 "json.y"
     { 
               // printf("pair\n");
               (yyval.str) = (yyvsp[0].str); 
             }
-#line 1288 "json.tab.c"
+#line 1296 "json.tab.c"
     break;
 
   case 5:
-#line 79 "json.y"
+#line 87 "json.y"
     { 
               // printf("members\n");
-              strcat((yyvsp[-2].str), " ");
-              strcat((yyvsp[-2].str), (yyvsp[0].str));
-              (yyval.str) = (yyvsp[-2].str);
+              char* result = malloc(strlen((yyvsp[-2].str)) + strlen((yyvsp[0].str)) + strlen(" ") + 1);
+              strcat(result, (yyvsp[-2].str));
+              strcat(result, " ");
+              strcat(result, (yyvsp[0].str));
+              (yyval.str) = result;
             }
-#line 1299 "json.tab.c"
+#line 1309 "json.tab.c"
     break;
 
   case 6:
-#line 87 "json.y"
+#line 97 "json.y"
     {
               // printf("KV\n");
               (yyval.str) = decodeKV((yyvsp[-2].str), (yyvsp[0].str));
             }
-#line 1308 "json.tab.c"
+#line 1318 "json.tab.c"
     break;
 
   case 7:
-#line 91 "json.y"
+#line 101 "json.y"
     {
               // printf("KObj\n");
               (yyval.str) = decodeObject((yyvsp[-2].str), (yyvsp[0].str));
             }
-#line 1317 "json.tab.c"
+#line 1327 "json.tab.c"
     break;
 
   case 8:
-#line 95 "json.y"
+#line 105 "json.y"
     { 
-            // printf("array\n");
-            (yyval.str) = decodeArray((yyvsp[-2].str), (yyvsp[0].str)); 
+              // printf("array\n");
+              (yyval.str) = decodeArray((yyvsp[-2].str), (yyvsp[0].str)); 
             }
-#line 1326 "json.tab.c"
+#line 1336 "json.tab.c"
     break;
 
   case 9:
-#line 101 "json.y"
+#line 111 "json.y"
     { (yyval.str) = (yyvsp[-1].str); }
-#line 1332 "json.tab.c"
+#line 1342 "json.tab.c"
     break;
 
   case 10:
-#line 103 "json.y"
+#line 113 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1338 "json.tab.c"
+#line 1348 "json.tab.c"
     break;
 
   case 11:
-#line 104 "json.y"
+#line 114 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1344 "json.tab.c"
+#line 1354 "json.tab.c"
     break;
 
   case 12:
-#line 105 "json.y"
+#line 115 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1350 "json.tab.c"
-    break;
-
-  case 13:
-#line 106 "json.y"
-    { 
-              strcat((yyvsp[-2].str), " ");
-              strcat((yyvsp[-2].str), (yyvsp[0].str));
-              (yyval.str) = (yyvsp[-2].str);
-            }
 #line 1360 "json.tab.c"
     break;
 
-  case 14:
-#line 111 "json.y"
-    { 
-              strcat((yyvsp[-2].str), " ");
-              strcat((yyvsp[-2].str), (yyvsp[0].str));
-              (yyval.str) = (yyvsp[-2].str);
+  case 13:
+#line 116 "json.y"
+    {
+              char* result = malloc(strlen((yyvsp[-2].str)) + strlen((yyvsp[0].str)) + strlen(" ") + 1);
+              strcat(result, (yyvsp[-2].str));
+              strcat(result, " ");
+              strcat(result, (yyvsp[0].str));
+              (yyval.str) = result;
             }
-#line 1370 "json.tab.c"
+#line 1372 "json.tab.c"
+    break;
+
+  case 14:
+#line 123 "json.y"
+    { 
+              char* result = malloc(strlen((yyvsp[-2].str)) + strlen((yyvsp[0].str)) + strlen(" ") + 1);
+              strcat(result, (yyvsp[-2].str));
+              strcat(result, " ");
+              strcat(result, (yyvsp[0].str));
+              (yyval.str) = result;
+            }
+#line 1384 "json.tab.c"
     break;
 
   case 15:
-#line 116 "json.y"
+#line 130 "json.y"
     { 
-              strcat((yyvsp[-2].str), " ");
-              strcat((yyvsp[-2].str), (yyvsp[0].str));
-              (yyval.str) = (yyvsp[-2].str);
+              char* result = malloc(strlen((yyvsp[-2].str)) + strlen((yyvsp[0].str)) + strlen(" ") + 1);
+              strcat(result, (yyvsp[-2].str));
+              strcat(result, " ");
+              strcat(result, (yyvsp[0].str));
+              (yyval.str) = result;
             }
-#line 1380 "json.tab.c"
+#line 1396 "json.tab.c"
     break;
 
   case 16:
-#line 122 "json.y"
+#line 138 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1386 "json.tab.c"
+#line 1402 "json.tab.c"
     break;
 
   case 17:
-#line 123 "json.y"
+#line 139 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1392 "json.tab.c"
+#line 1408 "json.tab.c"
     break;
 
   case 18:
-#line 124 "json.y"
+#line 140 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1398 "json.tab.c"
+#line 1414 "json.tab.c"
     break;
 
 
-#line 1402 "json.tab.c"
+#line 1418 "json.tab.c"
 
       default: break;
     }
@@ -1630,7 +1646,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 127 "json.y"
+#line 143 "json.y"
 
 
 void yyerror (char* s) {
@@ -1704,11 +1720,11 @@ char* decodeKV(char* key, char* value) {
       break;
     case TYPE:
       if (strcmp(value, "image") == 0) {
-        out = malloc(strlen("background-image:") + 1);
-        strcat(out, "background-image:");
+        out = malloc(strlen("background-image: ") + 1);
+        strcat(out, "background-image: ");
       } else if (strcmp(value, "solid") == 0) {
-        out = malloc(strlen("background-color:") + 1);
-        strcat(out, "background-color:");
+        out = malloc(strlen("background-color: ") + 1);
+        strcat(out, "background-color: ");
       }
       break;
     case IMAGE:
@@ -1717,10 +1733,17 @@ char* decodeKV(char* key, char* value) {
       strcat(out, value);
       strcat(out, "');");
       break;
-    case COLOR:
+    case BGCOLOR:
       out = malloc(strlen(";") + strlen(value) + 1);
       strcat(out, value);
       strcat(out, ";");
+      break;
+    case SIZE:
+      out = malloc(strlen(key) + strlen(value) + strlen(": px;") + 1);
+      strcat(out, key);
+      strcat(out, ": ");
+      strcat(out, value);
+      strcat(out, "px;");
       break;
     default:
       out = malloc(strlen(key) + strlen(": ;") + strlen(value) + 1);
@@ -1728,6 +1751,7 @@ char* decodeKV(char* key, char* value) {
       strcat(out, ": ");
       strcat(out, value);
       strcat(out, ";");
+      break;
   }
 
   return out;
@@ -1738,8 +1762,8 @@ char* decodeObject(char* key, char* values) {
 
   switch(lookup(key)) {
     case ABSOLUTE:
-      out = malloc(strlen("style=\"display: absolute; \" ") + strlen(values) + 1);
-      strcat(out, "style=\"display: absolute; ");
+      out = malloc(strlen("style=\"position: absolute; \" ") + strlen(values) + 1);
+      strcat(out, "style=\"position: absolute; ");
       strcat(out, values);
       strcat(out, "\" ");
       break;
@@ -1765,7 +1789,6 @@ char* decodeArray(char* key, char* value) {
 
   switch(lookup(key)) {
     case CHILD:
-      out = malloc(strlen(value) + 1);
       out = value;
       break;
   }
@@ -1780,7 +1803,7 @@ char* checkDIV(char* str) {
     strcat(out, str);
     strcat(out, "</div>");
   } else {
-    return str;
+    out = str;
   }
 
   return out;
