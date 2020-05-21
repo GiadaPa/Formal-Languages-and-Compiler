@@ -27,6 +27,10 @@
                             "top": 25.0,
                             "left": 25.0
                         },
+                        "fill":{
+                            "type": "solid",
+                            "background-color":"#C4C4C4"
+                        },
                         "fill": {
                             "type": "image",
                             "imageRef": "22c4422dd975abae62c448816e7be0feac25b1e0"
@@ -105,6 +109,10 @@
                             "width": 300.0,
                             "top": 24.0,
                             "left": 472.0
+                        },
+                        "fill":{
+                            "type": "solid",
+                            "background-color":"#C4C4C4"
                         },
                         "fill": {
                             "type": "image",
