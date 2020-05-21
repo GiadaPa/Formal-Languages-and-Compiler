@@ -34,6 +34,8 @@
   char* decodeArray(char* key, char* value);
   char* checkDIV(char* str);
 
+  char* generatedOutput;
+
 %}
 
 %token <str> NUMBER
@@ -59,7 +61,10 @@
 
 %%
 
-start: object { printf($1); }
+start: object { 
+              // printf($1);
+              generatedOutput = $1;
+            }
 
 object: OBJECT_BEGIN members OBJECT_END { 
               // printf("object\n");
@@ -127,11 +132,39 @@ void yyerror (char* s) {
 
 int main (int argc, char *argv[]) {
   int result = yyparse();
+  
+  printf("\n");
   if (result == 0) {
     printf("\n\nSUCCESS:: The json file `%s.json` has been successfully transpiled.\n", argv[1]);
+
+    char* filename = malloc(strlen(argv[1]) + strlen(".html") + 1);
+    strcat(filename, argv[1]);
+    strcat(filename, ".html");
+
+    result = printToFile(filename, generatedOutput);
+    if (result == 0) {
+      printf("SUCCESS:: The HTML code has been successfully generated in `%s`.\n", filename);
+    } else {
+      printf("ERROR:: An error occurred in writing `%s`. Program is being closed.\n", filename);
+    }
+
   } else {
-    printf("\n\nERROR:: An error occurred in parsing `%s.json`. Program is being closed.\n", argv[1]);
+    printf("ERROR:: An error occurred in parsing `%s.json`. Program is being closed.\n", argv[1]);
   }
+
+  return 0;
+}
+
+int printToFile (char *filename, char *content) {
+  FILE *f = fopen(filename, "w");
+  if (f == NULL) {
+      printf("Error opening file!\n");
+      return -1;
+  }
+
+  fprintf(f, content);
+
+  fclose(f);
 
   return 0;
 }

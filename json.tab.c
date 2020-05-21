@@ -103,8 +103,10 @@
   char* decodeArray(char* key, char* value);
   char* checkDIV(char* str);
 
+  char* generatedOutput;
 
-#line 108 "json.tab.c"
+
+#line 110 "json.tab.c"
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
@@ -159,11 +161,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 54 "json.y"
+#line 56 "json.y"
 
   char *str;
 
-#line 167 "json.tab.c"
+#line 169 "json.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -469,8 +471,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    62,    62,    64,    70,    74,    82,    86,    90,    96,
-      98,    99,   100,   101,   106,   111,   117,   118,   119
+       0,    64,    64,    69,    75,    79,    87,    91,    95,   101,
+     103,   104,   105,   106,   111,   116,   122,   123,   124
 };
 #endif
 
@@ -1259,141 +1261,144 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 62 "json.y"
-    { printf((yyvsp[0].str)); }
-#line 1265 "json.tab.c"
+#line 64 "json.y"
+    { 
+              // printf($1);
+              generatedOutput = (yyvsp[0].str);
+            }
+#line 1270 "json.tab.c"
     break;
 
   case 3:
-#line 64 "json.y"
+#line 69 "json.y"
     { 
               // printf("object\n");
               (yyval.str) = checkDIV((yyvsp[-1].str)); 
             }
-#line 1274 "json.tab.c"
+#line 1279 "json.tab.c"
     break;
 
   case 4:
-#line 70 "json.y"
+#line 75 "json.y"
     { 
               // printf("pair\n");
               (yyval.str) = (yyvsp[0].str); 
             }
-#line 1283 "json.tab.c"
+#line 1288 "json.tab.c"
     break;
 
   case 5:
-#line 74 "json.y"
+#line 79 "json.y"
     { 
               // printf("members\n");
               strcat((yyvsp[-2].str), " ");
               strcat((yyvsp[-2].str), (yyvsp[0].str));
               (yyval.str) = (yyvsp[-2].str);
             }
-#line 1294 "json.tab.c"
+#line 1299 "json.tab.c"
     break;
 
   case 6:
-#line 82 "json.y"
+#line 87 "json.y"
     {
               // printf("KV\n");
               (yyval.str) = decodeKV((yyvsp[-2].str), (yyvsp[0].str));
             }
-#line 1303 "json.tab.c"
+#line 1308 "json.tab.c"
     break;
 
   case 7:
-#line 86 "json.y"
+#line 91 "json.y"
     {
               // printf("KObj\n");
               (yyval.str) = decodeObject((yyvsp[-2].str), (yyvsp[0].str));
             }
-#line 1312 "json.tab.c"
+#line 1317 "json.tab.c"
     break;
 
   case 8:
-#line 90 "json.y"
+#line 95 "json.y"
     { 
             // printf("array\n");
             (yyval.str) = decodeArray((yyvsp[-2].str), (yyvsp[0].str)); 
             }
-#line 1321 "json.tab.c"
+#line 1326 "json.tab.c"
     break;
 
   case 9:
-#line 96 "json.y"
+#line 101 "json.y"
     { (yyval.str) = (yyvsp[-1].str); }
-#line 1327 "json.tab.c"
+#line 1332 "json.tab.c"
     break;
 
   case 10:
-#line 98 "json.y"
+#line 103 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1333 "json.tab.c"
+#line 1338 "json.tab.c"
     break;
 
   case 11:
-#line 99 "json.y"
+#line 104 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1339 "json.tab.c"
+#line 1344 "json.tab.c"
     break;
 
   case 12:
-#line 100 "json.y"
+#line 105 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1345 "json.tab.c"
+#line 1350 "json.tab.c"
     break;
 
   case 13:
-#line 101 "json.y"
-    { 
-              strcat((yyvsp[-2].str), " ");
-              strcat((yyvsp[-2].str), (yyvsp[0].str));
-              (yyval.str) = (yyvsp[-2].str);
-            }
-#line 1355 "json.tab.c"
-    break;
-
-  case 14:
 #line 106 "json.y"
     { 
               strcat((yyvsp[-2].str), " ");
               strcat((yyvsp[-2].str), (yyvsp[0].str));
               (yyval.str) = (yyvsp[-2].str);
             }
-#line 1365 "json.tab.c"
+#line 1360 "json.tab.c"
     break;
 
-  case 15:
+  case 14:
 #line 111 "json.y"
     { 
               strcat((yyvsp[-2].str), " ");
               strcat((yyvsp[-2].str), (yyvsp[0].str));
               (yyval.str) = (yyvsp[-2].str);
             }
-#line 1375 "json.tab.c"
+#line 1370 "json.tab.c"
+    break;
+
+  case 15:
+#line 116 "json.y"
+    { 
+              strcat((yyvsp[-2].str), " ");
+              strcat((yyvsp[-2].str), (yyvsp[0].str));
+              (yyval.str) = (yyvsp[-2].str);
+            }
+#line 1380 "json.tab.c"
     break;
 
   case 16:
-#line 117 "json.y"
+#line 122 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1381 "json.tab.c"
+#line 1386 "json.tab.c"
     break;
 
   case 17:
-#line 118 "json.y"
+#line 123 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1387 "json.tab.c"
+#line 1392 "json.tab.c"
     break;
 
   case 18:
-#line 119 "json.y"
+#line 124 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1393 "json.tab.c"
+#line 1398 "json.tab.c"
     break;
 
 
-#line 1397 "json.tab.c"
+#line 1402 "json.tab.c"
 
       default: break;
     }
@@ -1625,7 +1630,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 122 "json.y"
+#line 127 "json.y"
 
 
 void yyerror (char* s) {
@@ -1634,11 +1639,39 @@ void yyerror (char* s) {
 
 int main (int argc, char *argv[]) {
   int result = yyparse();
+  
+  printf("\n");
   if (result == 0) {
     printf("\n\nSUCCESS:: The json file `%s.json` has been successfully transpiled.\n", argv[1]);
+
+    char* filename = malloc(strlen(argv[1]) + strlen(".html") + 1);
+    strcat(filename, argv[1]);
+    strcat(filename, ".html");
+
+    result = printToFile(filename, generatedOutput);
+    if (result == 0) {
+      printf("SUCCESS:: The HTML code has been successfully generated in `%s`.\n", filename);
+    } else {
+      printf("ERROR:: An error occurred in writing `%s`. Program is being closed.\n", filename);
+    }
+
   } else {
-    printf("\n\nERROR:: An error occurred in parsing `%s.json`. Program is being closed.\n", argv[1]);
+    printf("ERROR:: An error occurred in parsing `%s.json`. Program is being closed.\n", argv[1]);
   }
+
+  return 0;
+}
+
+int printToFile (char *filename, char *content) {
+  FILE *f = fopen(filename, "w");
+  if (f == NULL) {
+      printf("Error opening file!\n");
+      return -1;
+  }
+
+  fprintf(f, content);
+
+  fclose(f);
 
   return 0;
 }
