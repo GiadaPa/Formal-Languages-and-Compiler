@@ -1,28 +1,15 @@
-{
-    "name": "xiaomi-banner",
-    "style": {
-        "absoluteBoundingBox": {
-            "height": 963.0,
-            "width": 1274.0,
-            "right": 1040.0,
-            "left": -284.0
-        }
-    },
-    "characters": "",
-    "children": [
+
         {
             "name": "banner",
             "style": {
-                "width": "1000px",
-                "height": "3px",
                 "display": "flex",
                 "justify-content": "space-between",
                 "font-family": "Roboto",
                 "absoluteBoundingBox": {
-                    "height": 399.0,
-                    "width": 1000.0,
-                    "right": 1177.0,
-                    "left": -2.0
+                    "height": 398.0,
+                    "width": 999.0,
+                    "top": 282.0,
+                    "left": 137.0
                 },
                 "fill": {
                     "type": "solid",
@@ -34,16 +21,11 @@
                 {
                     "name": "logo",
                     "style": {
-                        "top": "25px",
-                        "left": "25px",
-                        "height": "65px",
-                        "width": "65px",
-                        "padding-right": "15px",
                         "absoluteBoundingBox": {
                             "height": 65.0,
                             "width": 65.0,
-                            "right": 1202.0,
-                            "left": 22.0
+                            "top": 25.0,
+                            "left": 25.0
                         },
                         "fill": {
                             "type": "image",
@@ -58,8 +40,8 @@
                         "absoluteBoundingBox": {
                             "height": 245.0,
                             "width": 338.0,
-                            "right": 1235.0,
-                            "left": 74.0
+                            "top": 76.5,
+                            "left": 112.0
                         }
                     },
                     "characters": "",
@@ -72,10 +54,10 @@
                                 "color": "white",
                                 "font-family": "Roboto",
                                 "absoluteBoundingBox": {
-                                    "height": 59.0,
-                                    "width": 212.0,
-                                    "right": 1298.0,
-                                    "left": 74.0
+                                    "height": 118.0,
+                                    "width": 214.0,
+                                    "top": -7.0,
+                                    "left": 62.0
                                 }
                             },
                             "characters": "SPECIAL OFFER"
@@ -83,15 +65,15 @@
                         {
                             "name": "h2",
                             "style": {
-                                "font-size": "40px",
+                                "font-size": "35px",
                                 "font-weight": 500,
                                 "color": "white",
                                 "font-family": "Roboto",
                                 "absoluteBoundingBox": {
                                     "height": 47.0,
                                     "width": 238.0,
-                                    "right": 1285.0,
-                                    "left": 173.0
+                                    "top": 131.0,
+                                    "left": 50.0
                                 }
                             },
                             "characters": "Xiaomi Mi 9T"
@@ -106,8 +88,8 @@
                                 "absoluteBoundingBox": {
                                     "height": 59.0,
                                     "width": 170.0,
-                                    "right": 1319.0,
-                                    "left": 260.0
+                                    "top": 198.0,
+                                    "left": 73.0
                                 }
                             },
                             "characters": "2650$"
@@ -118,15 +100,11 @@
                     "name": "image",
                     "style": {
                         "display": "absolute",
-                        "height": 350.0,
-                        "width": 250.0,
-                        "left": 2726.0,
-                        "top": -252.0,
                         "absoluteBoundingBox": {
                             "height": 350.0,
                             "width": 300.0,
-                            "right": 1623.0,
-                            "left": 22.0
+                            "top": 24.0,
+                            "left": 472.0
                         },
                         "fill": {
                             "type": "image",
@@ -140,12 +118,12 @@
                     "style": {
                         "display": "flex",
                         "flex-direction": "column",
-                        "padding-top": "15px",
+                        "padding-top": "0px",
                         "absoluteBoundingBox": {
-                            "height": 50.0,
+                            "height": 269.0,
                             "width": 180.0,
-                            "right": 1972.0,
-                            "left": 63.0
+                            "top": 64.5,
+                            "left": 794.0
                         }
                     },
                     "characters": "",
@@ -156,8 +134,8 @@
                                 "absoluteBoundingBox": {
                                     "height": 50.0,
                                     "width": 180.0,
-                                    "right": 1972.0,
-                                    "left": 63.0
+                                    "top": 0.0,
+                                    "left": 0.0
                                 }
                             },
                             "characters": "",
@@ -165,18 +143,16 @@
                                 {
                                     "name": "icon",
                                     "style": {
-                                        "height": "50px",
-                                        "width": "50px",
                                         "display": "inline-block",
                                         "absoluteBoundingBox": {
                                             "height": 50.0,
                                             "width": 50.0,
-                                            "right": 1972.0,
-                                            "left": 63.0
+                                            "top": 0.0,
+                                            "left": 0.0
                                         },
                                         "fill": {
                                             "type": "solid",
-                                            "background-color": "silver"
+                                            "background-color": "#C4C4C4"
                                         }
                                     },
                                     "characters": ""
@@ -185,14 +161,14 @@
                                     "name": "text",
                                     "style": {
                                         "font-size": "12px",
-                                        "font-weight": 400,
+                                        "font-weight": "normal",
                                         "color": "white",
                                         "font-family": "Roboto",
                                         "absoluteBoundingBox": {
-                                            "height": 42.0,
-                                            "width": 86.0,
-                                            "right": 2033.0,
-                                            "left": 67.0
+                                            "height": 28.0,
+                                            "width": 130.0,
+                                            "top": 4.5,
+                                            "left": 61.0
                                         }
                                     },
                                     "characters": " Battery super power 6000mA/h"
@@ -205,8 +181,8 @@
                                 "absoluteBoundingBox": {
                                     "height": 50.0,
                                     "width": 180.0,
-                                    "right": 1972.0,
-                                    "left": 136.0
+                                    "top": 146.0,
+                                    "left": 0.0
                                 }
                             },
                             "characters": "",
@@ -214,14 +190,12 @@
                                 {
                                     "name": "icon",
                                     "style": {
-                                        "height": "50px",
-                                        "width": "50px",
                                         "display": "inline-block",
                                         "absoluteBoundingBox": {
                                             "height": 50.0,
                                             "width": 50.0,
-                                            "right": 1972.0,
-                                            "left": 136.0
+                                            "top": 0.0,
+                                            "left": 0.0
                                         },
                                         "fill": {
                                             "type": "solid",
@@ -234,14 +208,14 @@
                                     "name": "text",
                                     "style": {
                                         "font-size": "12px",
-                                        "font-weight": 400,
+                                        "font-weight": "normal",
                                         "color": "white",
                                         "font-family": "Roboto",
                                         "absoluteBoundingBox": {
                                             "height": 28.0,
-                                            "width": 100.0,
-                                            "right": 2033.0,
-                                            "left": 147.0
+                                            "width": 120.0,
+                                            "top": 11.0,
+                                            "left": 61.0
                                         }
                                     },
                                     "characters": "Fingerprint underneath the screen"
@@ -254,8 +228,8 @@
                                 "absoluteBoundingBox": {
                                     "height": 50.0,
                                     "width": 180.0,
-                                    "right": 1972.0,
-                                    "left": 209.0
+                                    "top": 219.0,
+                                    "left": 0.0
                                 }
                             },
                             "characters": "",
@@ -263,14 +237,12 @@
                                 {
                                     "name": "icon",
                                     "style": {
-                                        "height": "50px",
-                                        "width": "50px",
                                         "display": "inline-block",
                                         "absoluteBoundingBox": {
                                             "height": 50.0,
                                             "width": 50.0,
-                                            "right": 1972.0,
-                                            "left": 209.0
+                                            "top": 0.0,
+                                            "left": 0.0
                                         },
                                         "fill": {
                                             "type": "solid",
@@ -283,14 +255,14 @@
                                     "name": "text",
                                     "style": {
                                         "font-size": "12px",
-                                        "font-weight": 400,
+                                        "font-weight": "normal",
                                         "color": "white",
                                         "font-family": "Roboto",
                                         "absoluteBoundingBox": {
                                             "height": 28.0,
-                                            "width": 36.0,
-                                            "right": 2033.0,
-                                            "left": 220.0
+                                            "width": 120.0,
+                                            "top": 11.0,
+                                            "left": 61.0
                                         }
                                     },
                                     "characters": "RAM 1 RAM 2"
@@ -303,8 +275,8 @@
                                 "absoluteBoundingBox": {
                                     "height": 50.0,
                                     "width": 180.0,
-                                    "right": 1972.0,
-                                    "left": 282.0
+                                    "top": 73.0,
+                                    "left": 0.0
                                 }
                             },
                             "characters": "",
@@ -312,14 +284,12 @@
                                 {
                                     "name": "icon",
                                     "style": {
-                                        "height": "50px",
-                                        "width": "50px",
                                         "display": "inline-block",
                                         "absoluteBoundingBox": {
                                             "height": 50.0,
                                             "width": 50.0,
-                                            "right": 1972.0,
-                                            "left": 282.0
+                                            "top": 0.0,
+                                            "left": 0.0
                                         },
                                         "fill": {
                                             "type": "solid",
@@ -332,14 +302,14 @@
                                     "name": "text",
                                     "style": {
                                         "font-size": "12px",
-                                        "font-weight": 400,
+                                        "font-weight": "normal",
                                         "color": "white",
                                         "font-family": "Roboto",
                                         "absoluteBoundingBox": {
-                                            "height": 42.0,
-                                            "width": 104.0,
-                                            "right": 2033.0,
-                                            "left": 286.0
+                                            "height": 28.0,
+                                            "width": 121.0,
+                                            "top": 4.0,
+                                            "left": 61.0
                                         }
                                     },
                                     "characters": "New generation camera w/ fish eye"
@@ -350,5 +320,3 @@
                 }
             ]
         }
-    ]
-}
