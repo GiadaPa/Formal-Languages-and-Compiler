@@ -4,4 +4,4 @@ json:   json.l json.y
 	bison -vd json.y
 	flex -s json.l
 	gcc json.tab.c -lfl
-	./a.out
+	./a.out $(FILE) < $(FILE).json

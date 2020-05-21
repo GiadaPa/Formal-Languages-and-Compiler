@@ -72,8 +72,6 @@
   #include <string.h>
   #include "json.lex.c"
 
-  #define YYDEBUG 1
-
   #define CLASS 0
   #define CONTENT 1
   #define TYPE 2
@@ -106,7 +104,7 @@
   char* checkDIV(char* str);
 
 
-#line 110 "json.tab.c"
+#line 108 "json.tab.c"
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
@@ -161,11 +159,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 56 "json.y"
+#line 54 "json.y"
 
   char *str;
 
-#line 169 "json.tab.c"
+#line 167 "json.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -471,8 +469,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    64,    64,    66,    72,    76,    84,    88,    92,    98,
-     100,   101,   102,   103,   108,   113,   119,   120,   121
+       0,    62,    62,    64,    70,    74,    82,    86,    90,    96,
+      98,    99,   100,   101,   106,   111,   117,   118,   119
 };
 #endif
 
@@ -1261,141 +1259,141 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 64 "json.y"
+#line 62 "json.y"
     { printf((yyvsp[0].str)); }
-#line 1267 "json.tab.c"
+#line 1265 "json.tab.c"
     break;
 
   case 3:
-#line 66 "json.y"
+#line 64 "json.y"
     { 
               // printf("object\n");
               (yyval.str) = checkDIV((yyvsp[-1].str)); 
             }
-#line 1276 "json.tab.c"
+#line 1274 "json.tab.c"
     break;
 
   case 4:
-#line 72 "json.y"
+#line 70 "json.y"
     { 
               // printf("pair\n");
               (yyval.str) = (yyvsp[0].str); 
             }
-#line 1285 "json.tab.c"
+#line 1283 "json.tab.c"
     break;
 
   case 5:
-#line 76 "json.y"
+#line 74 "json.y"
     { 
               // printf("members\n");
               strcat((yyvsp[-2].str), " ");
               strcat((yyvsp[-2].str), (yyvsp[0].str));
               (yyval.str) = (yyvsp[-2].str);
             }
-#line 1296 "json.tab.c"
+#line 1294 "json.tab.c"
     break;
 
   case 6:
-#line 84 "json.y"
+#line 82 "json.y"
     {
               // printf("KV\n");
               (yyval.str) = decodeKV((yyvsp[-2].str), (yyvsp[0].str));
             }
-#line 1305 "json.tab.c"
+#line 1303 "json.tab.c"
     break;
 
   case 7:
-#line 88 "json.y"
+#line 86 "json.y"
     {
               // printf("KObj\n");
               (yyval.str) = decodeObject((yyvsp[-2].str), (yyvsp[0].str));
             }
-#line 1314 "json.tab.c"
+#line 1312 "json.tab.c"
     break;
 
   case 8:
-#line 92 "json.y"
+#line 90 "json.y"
     { 
             // printf("array\n");
             (yyval.str) = decodeArray((yyvsp[-2].str), (yyvsp[0].str)); 
             }
-#line 1323 "json.tab.c"
+#line 1321 "json.tab.c"
     break;
 
   case 9:
-#line 98 "json.y"
+#line 96 "json.y"
     { (yyval.str) = (yyvsp[-1].str); }
-#line 1329 "json.tab.c"
+#line 1327 "json.tab.c"
     break;
 
   case 10:
-#line 100 "json.y"
+#line 98 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1335 "json.tab.c"
+#line 1333 "json.tab.c"
     break;
 
   case 11:
-#line 101 "json.y"
+#line 99 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1341 "json.tab.c"
+#line 1339 "json.tab.c"
     break;
 
   case 12:
-#line 102 "json.y"
+#line 100 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1347 "json.tab.c"
+#line 1345 "json.tab.c"
     break;
 
   case 13:
-#line 103 "json.y"
+#line 101 "json.y"
     { 
               strcat((yyvsp[-2].str), " ");
               strcat((yyvsp[-2].str), (yyvsp[0].str));
               (yyval.str) = (yyvsp[-2].str);
             }
-#line 1357 "json.tab.c"
+#line 1355 "json.tab.c"
     break;
 
   case 14:
-#line 108 "json.y"
+#line 106 "json.y"
     { 
               strcat((yyvsp[-2].str), " ");
               strcat((yyvsp[-2].str), (yyvsp[0].str));
               (yyval.str) = (yyvsp[-2].str);
             }
-#line 1367 "json.tab.c"
+#line 1365 "json.tab.c"
     break;
 
   case 15:
-#line 113 "json.y"
+#line 111 "json.y"
     { 
               strcat((yyvsp[-2].str), " ");
               strcat((yyvsp[-2].str), (yyvsp[0].str));
               (yyval.str) = (yyvsp[-2].str);
             }
-#line 1377 "json.tab.c"
+#line 1375 "json.tab.c"
     break;
 
   case 16:
-#line 119 "json.y"
+#line 117 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1383 "json.tab.c"
+#line 1381 "json.tab.c"
     break;
 
   case 17:
-#line 120 "json.y"
+#line 118 "json.y"
     { (yyval.str) = (yyvsp[0].str); }
-#line 1389 "json.tab.c"
+#line 1387 "json.tab.c"
     break;
 
   case 18:
-#line 121 "json.y"
+#line 119 "json.y"
     { (yyval.str) = (yyvsp[0].str);  }
-#line 1395 "json.tab.c"
+#line 1393 "json.tab.c"
     break;
 
 
-#line 1399 "json.tab.c"
+#line 1397 "json.tab.c"
 
       default: break;
     }
@@ -1627,18 +1625,21 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 124 "json.y"
+#line 122 "json.y"
 
 
 void yyerror (char* s) {
   fprintf (stderr, "%s\n", s);
 }
 
-int main() {
-  yyparse();
-  #if YYDEBUG
-    yydebug = 1;
-  #endif
+int main (int argc, char *argv[]) {
+  int result = yyparse();
+  if (result == 0) {
+    printf("\n\nSUCCESS:: The json file `%s.json` has been successfully transpiled.\n", argv[1]);
+  } else {
+    printf("\n\nERROR:: An error occurred in parsing `%s.json`. Program is being closed.\n", argv[1]);
+  }
+
   return 0;
 }
 
@@ -1701,8 +1702,6 @@ char* decodeKV(char* key, char* value) {
 
 char* decodeObject(char* key, char* values) {
   char* out;
-
-  printf(key);
 
   switch(lookup(key)) {
     case ABSOLUTE:

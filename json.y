@@ -3,8 +3,6 @@
   #include <string.h>
   #include "json.lex.c"
 
-  #define YYDEBUG 1
-
   #define CLASS 0
   #define CONTENT 1
   #define TYPE 2
@@ -127,11 +125,14 @@ void yyerror (char* s) {
   fprintf (stderr, "%s\n", s);
 }
 
-int main() {
-  yyparse();
-  #if YYDEBUG
-    yydebug = 1;
-  #endif
+int main (int argc, char *argv[]) {
+  int result = yyparse();
+  if (result == 0) {
+    printf("\n\nSUCCESS:: The json file `%s.json` has been successfully transpiled.\n", argv[1]);
+  } else {
+    printf("\n\nERROR:: An error occurred in parsing `%s.json`. Program is being closed.\n", argv[1]);
+  }
+
   return 0;
 }
 
@@ -194,8 +195,6 @@ char* decodeKV(char* key, char* value) {
 
 char* decodeObject(char* key, char* values) {
   char* out;
-
-  printf(key);
 
   switch(lookup(key)) {
     case ABSOLUTE:
