@@ -1,0 +1,39 @@
+INPUT:
+{
+    name: DISPLAY,
+    width: DISPLAY SIZE:
+        [
+            BANNER:
+                name,
+                width,
+                height,
+                children:
+                        [
+                        DIVS: 
+                            {
+                                name,
+                                width,
+                                height,
+                                x,
+                                y,
+                                background
+                                fills (BACKGROUND?): 
+                                    [
+                                        color,
+                                        imageRef
+                                    ],
+                                cornerRadius,
+                                style: 
+                                    [
+                                        fontWeight,
+                                        fontSize,
+                                        textAlignHorizontal,
+                                        lineHeightPx,
+                                        fontFamily,
+                                        color
+                                    ],
+                                characters
+                            }
+                    ]
+        ]
+}
