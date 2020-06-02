@@ -66,3 +66,7 @@ cd Formal-Languages-and-Compilers/src/
 - **Gabriele De Candido** - [lelebus](https://github.com/lelebus)
 
 ## Project status
+
+The JSON object specifications, exported by the Figma API, have been changed, since the beginning of the project. For time reasons,  the compiler was not updated accordingly.
+
+You can find an example export .json file in the `files/` folder.
